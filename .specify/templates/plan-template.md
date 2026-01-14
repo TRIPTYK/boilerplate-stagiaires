@@ -31,7 +31,40 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+**Code Quality & Maintainability**
+- [ ] TypeScript enabled with strict checking
+- [ ] Components use Glimmer + `.gts` format
+- [ ] Linting configured (ESLint, Stylelint, ember-template-lint)
+- [ ] Prettier formatting configured
+- [ ] Accessibility requirements documented
+
+**Testing Standards** *(NON-NEGOTIABLE)*
+- [ ] Test-first workflow planned (tests → approval → fail → implement)
+- [ ] Component tests planned for all UI components
+- [ ] Integration tests planned for critical user journeys
+- [ ] Test organization follows convention (`tests/integration/`, `tests/unit/`)
+
+**User Experience Consistency**
+- [ ] Design system compliance documented
+- [ ] Loading states specified for async operations
+- [ ] Error handling approach defined
+- [ ] Responsive design requirements (320px, 768px, 1440px+)
+- [ ] Performance budget defined (<3s initial load, <100ms interactions)
+
+**Performance Requirements**
+- [ ] Bundle size targets set (<300KB initial, <1MB total gzipped)
+- [ ] Code splitting strategy defined (lazy routes, vendor chunks)
+- [ ] Asset optimization plan (WebP/AVIF images, CSS purging)
+- [ ] Runtime performance targets (<16ms render, <50ms blocking)
+- [ ] Lighthouse score targets (Perf ≥90, A11y ≥95, BP ≥90)
+
+**Technology Stack Compliance**
+- [ ] Using Ember.js v6.9+ (Octane)
+- [ ] Using Vite v7+ with Embroider
+- [ ] Using TypeScript v5.9+
+- [ ] Using pnpm v10+ workspaces
+- [ ] No prohibited patterns (classic components, mixins, `any` types, inline styles)
+- [ ] New dependencies justified (if any)
 
 ## Project Structure
 

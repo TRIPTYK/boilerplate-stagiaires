@@ -1,10 +1,11 @@
-import { dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { buildMacros } from '@embroider/macros/babel';
+'use strict';
 
-const macros = buildMacros();
+const {
+  babelCompatSupport,
+  templateCompatSupport,
+} = require('@embroider/compat/babel');
 
-export default {
+module.exports = {
   plugins: [
     [
       '@babel/plugin-transform-typescript',
@@ -18,26 +19,31 @@ export default {
       'babel-plugin-ember-template-compilation',
       {
         compilerPath: 'ember-source/dist/ember-template-compiler.js',
-        transforms: [...macros.templateMacros],
+        enableLegacyModules: [
+          'ember-cli-htmlbars',
+          'ember-cli-htmlbars-inline-precompile',
+          'htmlbars-inline-precompile',
+        ],
+        transforms: [...templateCompatSupport()],
       },
     ],
     [
       'module:decorator-transforms',
       {
         runtime: {
-          import: import.meta.resolve('decorator-transforms/runtime-esm'),
+          import: require.resolve('decorator-transforms/runtime-esm'),
         },
       },
     ],
     [
       '@babel/plugin-transform-runtime',
       {
-        absoluteRuntime: dirname(fileURLToPath(import.meta.url)),
+        absoluteRuntime: __dirname,
         useESModules: true,
         regenerator: false,
       },
     ],
-    ...macros.babelMacros,
+    ...babelCompatSupport(),
   ],
 
   generatorOpts: {

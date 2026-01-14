@@ -1,22 +1,33 @@
+import loadConfigFromMeta from '@embroider/config-meta-loader';
+import { assert } from '@ember/debug';
 
-interface Config {
-  isTesting?: boolean;
-  environment: string;
+const config = loadConfigFromMeta('front-app') as unknown;
+
+assert(
+  'config is not an object',
+  typeof config === 'object' && config !== null
+);
+assert(
+  'modulePrefix was not detected on your config',
+  'modulePrefix' in config && typeof config.modulePrefix === 'string'
+);
+assert(
+  'locationType was not detected on your config',
+  'locationType' in config && typeof config.locationType === 'string'
+);
+assert(
+  'rootURL was not detected on your config',
+  'rootURL' in config && typeof config.rootURL === 'string'
+);
+assert(
+  'APP was not detected on your config',
+  'APP' in config && typeof config.APP === 'object'
+);
+
+export default config as {
   modulePrefix: string;
   podModulePrefix?: string;
-  locationType: 'history' | 'hash' | 'none' | 'auto';
+  locationType: string;
   rootURL: string;
-  EmberENV?: Record<string, unknown>;
-  APP: Record<string, unknown> & { rootElement?: string; autoboot?: boolean };
-}
-
-const ENV: Config = {
-  modulePrefix: 'front-app',
-  environment: import.meta.env.DEV ? 'development' : 'production',
-  rootURL: '/',
-  locationType: 'history',
-  EmberENV: {},
-  APP: {},
-};
-
-export default ENV;
+  APP: Record<string, unknown>;
+} & Record<string, unknown>;

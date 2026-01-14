@@ -8,7 +8,7 @@
         "start": {
             "persistent": true,
             "interruptible": true,
-            "dependsOn": ["build"]
+            "dependsOn": ["^build"]
         }
     }
 }

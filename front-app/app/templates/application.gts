@@ -1,8 +1,17 @@
-import Button from '@libs/ui/components/button';
+import RouteTemplate from "ember-route-template";
+import type { TOC } from '@ember/component/template-only';
+import { pageTitle } from 'ember-page-title';
 
-<template>
-  <h1>Welcome to Ember</h1>
-  <Button />
+interface ApplicationSignature {
+  Args: {
+    model: unknown;
+    controller: unknown;
+  };
+}
+
+const template: TOC<ApplicationSignature> = <template>
+  {{pageTitle "Application"}}
   {{outlet}}
+</template>;
 
-</template>
+export default RouteTemplate(template)
