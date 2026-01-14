@@ -1,0 +1,9 @@
+packages:
+  - front-app
+  - libs/*
+onlyBuiltDependencies:
+  - edgedriver
+  - geckodriver
+
+autoInstallPeers: false
+resolvePeersFromWorkspaceRoot: false

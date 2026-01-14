@@ -1,5 +1,5 @@
 {
-  "name": "ui",
+  "name": "@libs/ui",
   "version": "0.0.0",
   "description": "The default blueprint for Embroider v2 addons.",
   "keywords": [
@@ -30,7 +30,8 @@
     "src"
   ],
   "scripts": {
-    "build": "rollup --config",
+    "build": "rolldown -c",
+    "build:watch": "rolldown --watch -c",
     "format": "prettier . --cache --write",
     "lint": "concurrently \"pnpm:lint:*(!fix)\" --names \"lint:\" --prefixColors auto",
     "lint:fix": "concurrently \"pnpm:lint:*:fix\" --names \"fix:\" --prefixColors auto && pnpm run format",
@@ -40,7 +41,7 @@
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
     "lint:types": "ember-tsc --noEmit",
-    "prepack": "rollup --config",
+    "prepack": "rolldown -c",
     "start": "vite dev",
     "test": "vite build --mode=development --out-dir dist-tests && testem --file testem.cjs ci --port 0"
   },
@@ -64,7 +65,7 @@
     "@embroider/vite": "^1.1.5",
     "@eslint/js": "^9.17.0",
     "@glimmer/component": "^2.0.0",
-    "@glint/ember-tsc": "^1.0.3",
+    "@glint/ember-tsc": "~1.0.9",
     "@glint/template": "^1.6.1",
     "@glint/tsserver-plugin": "^2.0.0",
     "@rollup/plugin-babel": "^6.0.4",
@@ -86,6 +87,7 @@
     "prettier-plugin-ember-template-tag": "^2.0.4",
     "qunit": "^2.24.1",
     "qunit-dom": "^3.4.0",
+    "rolldown": "1.0.0-beta.59",
     "rollup": "^4.22.5",
     "testem": "^3.15.1",
     "typescript": "~5.8.3",
@@ -98,6 +100,9 @@
   "ember-addon": {
     "version": 2,
     "type": "addon",
-    "main": "addon-main.cjs"
+    "main": "addon-main.cjs",
+    "app-js": {
+      "./components/button.js": "./dist/_app_/components/button.js"
+    }
   }
 }

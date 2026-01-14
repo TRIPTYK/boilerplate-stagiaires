@@ -1,0 +1,14 @@
+{
+    "tasks": {
+        "build": {
+            "dependsOn": ["^build"],
+            "inputs": [ "src/**", "app/**" ],
+            "outputs": [ "dist/**", "!.turbo/**" ]
+        },
+        "start": {
+            "persistent": true,
+            "interruptible": true,
+            "dependsOn": ["build"]
+        }
+    }
+}
