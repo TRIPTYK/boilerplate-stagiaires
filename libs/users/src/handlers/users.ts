@@ -34,7 +34,7 @@ const mockUsers = [
 
 const http = createOpenApiHttp<paths>();
 
-export const usersHandlers = [
+export default [
   http.get('/users', () => {
     return HttpResponse.json({
       data: mockUsers,

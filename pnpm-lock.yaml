@@ -345,9 +345,54 @@ importers:
       '@embroider/util':
         specifier: ^1.13.5
         version: 1.13.5(@glint/template@1.7.3)(ember-source@6.8.2(@glimmer/component@2.0.0)(rsvp@4.8.5))
+      '@triptyk/ember-input':
+        specifier: git+https://github.com/TRIPTYK/ember-common-ui/tree/upgrade-ember-ember-input-dist
+        version: https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/f7344b38d35031ee7773be4e264b7987c7777957(@babel/core@7.28.6)(@ember/string@4.0.1)(@eonasdan/tempus-dominus@6.10.4(@popperjs/core@2.11.8))(@glint/template@1.7.3)(ember-source@6.8.2(@glimmer/component@2.0.0)(rsvp@4.8.5))
+      '@triptyk/ember-input-validation':
+        specifier: git+https://github.com/TRIPTYK/ember-common-ui/tree/upgrade-ember-ember-input-validation-dist
+        version: https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/458ce5a671280311dac173db1f71adc70d32cf02(@babel/core@7.28.6)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.3))(@glint/template@1.7.3)(@triptyk/ember-input@https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/f7344b38d35031ee7773be4e264b7987c7777957(@babel/core@7.28.6)(@ember/string@4.0.1)(@eonasdan/tempus-dominus@6.10.4(@popperjs/core@2.11.8))(@glint/template@1.7.3)(ember-source@6.8.2(@glimmer/component@2.0.0)(rsvp@4.8.5)))(ember-immer-changeset@1.0.2(@babel/core@7.28.6)(ember-source@6.8.2(@glimmer/component@2.0.0)(rsvp@4.8.5)))(ember-source@6.8.2(@glimmer/component@2.0.0)(rsvp@4.8.5))(typescript@5.8.3)
+      '@triptyk/ember-ui':
+        specifier: git+https://github.com/TRIPTYK/ember-common-ui/tree/upgrade-ember-ember-ui-dist
+        version: https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/cfcbfd70452fda821d7bbc4660f82a1bba8c6047(@babel/core@7.28.6)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.3))(@glint/template@1.7.3)(@triptyk/ember-input@https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/f7344b38d35031ee7773be4e264b7987c7777957(@babel/core@7.28.6)(@ember/string@4.0.1)(@eonasdan/tempus-dominus@6.10.4(@popperjs/core@2.11.8))(@glint/template@1.7.3)(ember-source@6.8.2(@glimmer/component@2.0.0)(rsvp@4.8.5)))(ember-source@6.8.2(@glimmer/component@2.0.0)(rsvp@4.8.5))(typescript@5.8.3)
+      '@warp-drive/core':
+        specifier: 5.8.1
+        version: 5.8.1(@babel/core@7.28.6)(@glint/template@1.7.3)
+      '@warp-drive/ember':
+        specifier: 5.8.1
+        version: 5.8.1(@babel/core@7.28.6)(@ember/test-waiters@4.1.1(@glint/template@1.7.3))(@glint/template@1.7.3)
+      '@warp-drive/experiments':
+        specifier: ~0.2.7
+        version: 0.2.7(@glint/template@1.7.3)(@warp-drive/core@5.8.1(@babel/core@7.28.6)(@glint/template@1.7.3))
+      '@warp-drive/json-api':
+        specifier: 5.8.1
+        version: 5.8.1(@glint/template@1.7.3)(@warp-drive/core@5.8.1(@babel/core@7.28.6)(@glint/template@1.7.3))
+      '@warp-drive/legacy':
+        specifier: 5.8.1
+        version: 5.8.1(@glint/template@1.7.3)(@warp-drive/core@5.8.1(@babel/core@7.28.6)(@glint/template@1.7.3))(@warp-drive/utilities@5.8.1(@glint/template@1.7.3)(@warp-drive/core@5.8.1(@babel/core@7.28.6)(@glint/template@1.7.3)))
+      '@warp-drive/utilities':
+        specifier: 5.8.1
+        version: 5.8.1(@glint/template@1.7.3)(@warp-drive/core@5.8.1(@babel/core@7.28.6)(@glint/template@1.7.3))
       decorator-transforms:
         specifier: ^2.2.2
         version: 2.3.1(@babel/core@7.28.6)
+      ember-immer-changeset:
+        specifier: ^1.0.2
+        version: 1.0.2(@babel/core@7.28.6)(ember-source@6.8.2(@glimmer/component@2.0.0)(rsvp@4.8.5))
+      ember-page-title:
+        specifier: 9.0.3
+        version: 9.0.3
+      ember-strict-application-resolver:
+        specifier: ^0.1.0
+        version: 0.1.1(@babel/core@7.28.6)
+      msw:
+        specifier: ^2.12.7
+        version: 2.12.7(@types/node@25.0.10)(typescript@5.8.3)
+      openapi-msw:
+        specifier: ^2.0.0
+        version: 2.0.0(msw@2.12.7(@types/node@25.0.10)(typescript@5.8.3))
+      zod:
+        specifier: ^4.0.0
+        version: 4.3.6
     devDependencies:
       '@babel/core':
         specifier: ^7.25.2
@@ -406,45 +451,21 @@ importers:
       '@glint/tsserver-plugin':
         specifier: ^2.0.0
         version: 2.0.9
+      '@rollup/plugin-alias':
+        specifier: ^6.0.0
+        version: 6.0.0(rollup@4.56.0)
       '@rollup/plugin-babel':
         specifier: ^6.0.4
         version: 6.1.0(@babel/core@7.28.6)(rollup@4.56.0)
-      '@triptyk/ember-input':
-        specifier: git+https://github.com/TRIPTYK/ember-common-ui/tree/upgrade-ember-ember-input-dist
-        version: https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/f7344b38d35031ee7773be4e264b7987c7777957(@babel/core@7.28.6)(@ember/string@4.0.1)(@eonasdan/tempus-dominus@6.10.4(@popperjs/core@2.11.8))(@glint/template@1.7.3)(ember-source@6.8.2(@glimmer/component@2.0.0)(rsvp@4.8.5))
-      '@triptyk/ember-input-validation':
-        specifier: git+https://github.com/TRIPTYK/ember-common-ui/tree/upgrade-ember-ember-input-validation-dist
-        version: https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/458ce5a671280311dac173db1f71adc70d32cf02(@babel/core@7.28.6)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.3))(@glint/template@1.7.3)(@triptyk/ember-input@https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/f7344b38d35031ee7773be4e264b7987c7777957(@babel/core@7.28.6)(@ember/string@4.0.1)(@eonasdan/tempus-dominus@6.10.4(@popperjs/core@2.11.8))(@glint/template@1.7.3)(ember-source@6.8.2(@glimmer/component@2.0.0)(rsvp@4.8.5)))(ember-immer-changeset@1.0.2(@babel/core@7.28.6)(ember-source@6.8.2(@glimmer/component@2.0.0)(rsvp@4.8.5)))(ember-source@6.8.2(@glimmer/component@2.0.0)(rsvp@4.8.5))(typescript@5.8.3)
-      '@triptyk/ember-ui':
-        specifier: git+https://github.com/TRIPTYK/ember-common-ui/tree/upgrade-ember-ember-ui-dist
-        version: https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/cfcbfd70452fda821d7bbc4660f82a1bba8c6047(@babel/core@7.28.6)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.3))(@glint/template@1.7.3)(@triptyk/ember-input@https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/f7344b38d35031ee7773be4e264b7987c7777957(@babel/core@7.28.6)(@ember/string@4.0.1)(@eonasdan/tempus-dominus@6.10.4(@popperjs/core@2.11.8))(@glint/template@1.7.3)(ember-source@6.8.2(@glimmer/component@2.0.0)(rsvp@4.8.5)))(ember-source@6.8.2(@glimmer/component@2.0.0)(rsvp@4.8.5))(typescript@5.8.3)
       '@types/qunit':
         specifier: ^2.19.12
         version: 2.19.13
       '@warp-drive/build-config':
         specifier: 5.8.1
         version: 5.8.1(@babel/core@7.28.6)(@glint/template@1.7.3)
-      '@warp-drive/core':
-        specifier: 5.8.1
-        version: 5.8.1(@babel/core@7.28.6)(@glint/template@1.7.3)
       '@warp-drive/core-types':
         specifier: 5.8.1
         version: 5.8.1(@babel/core@7.28.6)(@glint/template@1.7.3)
-      '@warp-drive/ember':
-        specifier: 5.8.1
-        version: 5.8.1(@babel/core@7.28.6)(@ember/test-waiters@4.1.1(@glint/template@1.7.3))(@glint/template@1.7.3)
-      '@warp-drive/experiments':
-        specifier: ~0.2.7
-        version: 0.2.7(@glint/template@1.7.3)(@warp-drive/core@5.8.1(@babel/core@7.28.6)(@glint/template@1.7.3))
-      '@warp-drive/json-api':
-        specifier: 5.8.1
-        version: 5.8.1(@glint/template@1.7.3)(@warp-drive/core@5.8.1(@babel/core@7.28.6)(@glint/template@1.7.3))
-      '@warp-drive/legacy':
-        specifier: 5.8.1
-        version: 5.8.1(@glint/template@1.7.3)(@warp-drive/core@5.8.1(@babel/core@7.28.6)(@glint/template@1.7.3))(@warp-drive/utilities@5.8.1(@glint/template@1.7.3)(@warp-drive/core@5.8.1(@babel/core@7.28.6)(@glint/template@1.7.3)))
-      '@warp-drive/utilities':
-        specifier: 5.8.1
-        version: 5.8.1(@glint/template@1.7.3)(@warp-drive/core@5.8.1(@babel/core@7.28.6)(@glint/template@1.7.3))
       babel-plugin-ember-template-compilation:
         specifier: ~4.0.0
         version: 4.0.0
@@ -457,24 +478,15 @@ importers:
       ember-concurrency:
         specifier: ^5.1.0
         version: 5.1.0(@babel/core@7.28.6)(@glint/template@1.7.3)
-      ember-immer-changeset:
-        specifier: ^1.0.2
-        version: 1.0.2(@babel/core@7.28.6)(ember-source@6.8.2(@glimmer/component@2.0.0)(rsvp@4.8.5))
       ember-intl:
         specifier: ~8.0.3
         version: 8.0.3(@babel/core@7.28.6)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.3))(typescript@5.8.3)
-      ember-page-title:
-        specifier: ^9.0.3
-        version: 9.0.3
       ember-qunit:
         specifier: ^9.0.2
         version: 9.0.4(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.3))(@glint/template@1.7.3)(qunit@2.25.0)
       ember-source:
         specifier: ~6.8.0
         version: 6.8.2(@glimmer/component@2.0.0)(rsvp@4.8.5)
-      ember-strict-application-resolver:
-        specifier: ^0.1.0
-        version: 0.1.1(@babel/core@7.28.6)
       ember-template-lint:
         specifier: ^7.9.0
         version: 7.9.3
@@ -496,12 +508,6 @@ importers:
       globals:
         specifier: ^16.1.0
         version: 16.5.0
-      msw:
-        specifier: ^2.12.7
-        version: 2.12.7(@types/node@25.0.10)(typescript@5.8.3)
-      openapi-msw:
-        specifier: ^2.0.0
-        version: 2.0.0(msw@2.12.7(@types/node@25.0.10)(typescript@5.8.3))
       prettier:
         specifier: ^3.4.2
         version: 3.8.1
@@ -514,9 +520,6 @@ importers:
       qunit-dom:
         specifier: ^3.4.0
         version: 3.5.0
-      rolldown:
-        specifier: ~1.0.0-rc.1
-        version: 1.0.0-rc.1
       rollup:
         specifier: ^4.22.5
         version: 4.56.0
@@ -535,9 +538,6 @@ importers:
       webpack:
         specifier: ^5.104.1
         version: 5.104.1
-      zod:
-        specifier: ^4.0.0
-        version: 4.3.6
 
 packages:
 
@@ -1981,6 +1981,15 @@ packages:
 
   '@rolldown/pluginutils@1.0.0-rc.1':
     resolution: {integrity: sha512-UTBjtTxVOhodhzFVp/ayITaTETRHPUPYZPXQe0WU0wOgxghMojXxYjOiPOauKIYNWJAWS2fd7gJgGQK8GU8vDA==}
+
+  '@rollup/plugin-alias@6.0.0':
+    resolution: {integrity: sha512-tPCzJOtS7uuVZd+xPhoy5W4vThe6KWXNmsFCNktaAh5RTqcLiSfT4huPQIXkgJ6YCOjJHvecOAzQxLFhPxKr+g==}
+    engines: {node: '>=20.19.0'}
+    peerDependencies:
+      rollup: '>=4.0.0'
+    peerDependenciesMeta:
+      rollup:
+        optional: true
 
   '@rollup/plugin-babel@6.1.0':
     resolution: {integrity: sha512-dFZNuFD2YRcoomP4oYf+DvQNSUA9ih+A3vUqopQx5EdtPGo3WBnQcI/S8pwpz91UsGfL0HsMSOlaMld8HrbubA==}
@@ -10448,6 +10457,10 @@ snapshots:
     optional: true
 
   '@rolldown/pluginutils@1.0.0-rc.1': {}
+
+  '@rollup/plugin-alias@6.0.0(rollup@4.56.0)':
+    optionalDependencies:
+      rollup: 4.56.0
 
   '@rollup/plugin-babel@6.1.0(@babel/core@7.28.6)(rollup@4.56.0)':
     dependencies:

@@ -5,7 +5,7 @@ import translationsForEnUs from 'virtual:ember-intl/translations/en-us';
 import { setupWorker } from 'msw/browser';
 import { initialize } from '@libs/users';
 import { getOwner } from '@ember/-internals/owner';
-import { usersHandlers } from '@libs/users/handlers/users';
+import usersHandlers from '@libs/users/handlers/users';
 
 export default class ApplicationRoute extends Route {
   @service declare intl: IntlService;

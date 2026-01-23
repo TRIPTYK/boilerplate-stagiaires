@@ -2,6 +2,7 @@ import { babel } from '@rollup/plugin-babel';
 import { Addon } from '@embroider/addon-dev/rollup';
 import { fileURLToPath } from 'node:url';
 import { resolve, dirname } from 'node:path';
+import alias from '@rollup/plugin-alias';
 
 const addon = new Addon({
   srcDir: 'src',
@@ -13,13 +14,13 @@ const babelConfig = resolve(rootDirectory, './babel.publish.config.cjs');
 const tsConfig = resolve(rootDirectory, './tsconfig.publish.json');
 
 export default {
-  // This provides defaults that work well alongside `publicEntrypoints` below.
-  // You can augment this if you need to.
   output: addon.output(),
-  input: {
-    dir: 'src'
-  },
   plugins: [
+    alias({
+      entries: [
+        { find: '#src', replacement: resolve(rootDirectory, 'src') },
+      ]
+    }),
     // These are the modules that users should be able to import from your
     // addon. Anything not listed here may get optimized away.
     // By default all your JavaScript modules (**/*.js) will be importable.

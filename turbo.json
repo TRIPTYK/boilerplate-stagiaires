@@ -1,14 +1,15 @@
 {
+    "$schema": "https://turbo.build/schema.json",
     "tasks": {
         "api-types": {},
         "build": {
             "dependsOn": ["^build"],
-            "inputs": [ "src/**", "app/**" ],
-            "outputs": [ "dist/**", "!.turbo/**" ]
+            "inputs": ["src/**"],
+            "outputs": ["dist/**"]
         },
         "start": {
             "persistent": true,
-            "interruptible": true,
+            "cache": false,
             "dependsOn": ["^build"]
         }
     }
