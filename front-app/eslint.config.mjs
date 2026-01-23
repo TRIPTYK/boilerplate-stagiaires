@@ -38,7 +38,7 @@ const parserOptions = {
   },
 };
 
-export default ts.config(
+export default ts.configs(
   js.configs.recommended,
   ember.configs.base,
   ember.configs.gjs,

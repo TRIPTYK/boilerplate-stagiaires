@@ -1,10 +1,18 @@
 packages:
   - front-app
   - libs/*
+  - backend-app
+
 autoInstallPeers: false
+
 onlyBuiltDependencies:
+  - core-js
+  - core-js-pure
   - edgedriver
+  - esbuild
   - geckodriver
+
 patchedDependencies:
   '@embroider/vite': patches/@embroider__vite.patch
+
 resolvePeersFromWorkspaceRoot: false

@@ -1,9 +1,11 @@
 // vite.config.js
 import { webdriverio } from "@vitest/browser-webdriverio";
 import { defineConfig } from "vite";
+import tailwindcss from '@tailwindcss/vite'
 
 import { classicEmberSupport, ember, extensions } from "@embroider/vite";
 import { babel } from "@rollup/plugin-babel";
+import { loadTranslations } from '@ember-intl/vite';
 
 export default defineConfig({
   // Add this config
@@ -25,11 +27,13 @@ export default defineConfig({
   },
   // Existing config:
   plugins: [
+    tailwindcss(),
     classicEmberSupport(),
     ember(),
     babel({
       babelHelpers: "runtime",
       extensions,
     }),
+    loadTranslations()
   ],
 });

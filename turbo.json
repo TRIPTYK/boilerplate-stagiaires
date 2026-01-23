@@ -1,5 +1,6 @@
 {
     "tasks": {
+        "api-types": {},
         "build": {
             "dependsOn": ["^build"],
             "inputs": [ "src/**", "app/**" ],

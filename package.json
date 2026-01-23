@@ -11,7 +11,8 @@
   "license": "ISC",
   "packageManager": "pnpm@10.28.1",
   "devDependencies": {
-    "turbo": "^2.7.4"
+    "turbo": "^2.7.4",
+    "backend-app": "workspace:^"
   },
   "volta": {
     "node": "24.13.0",
