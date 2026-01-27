@@ -1,4 +1,4 @@
-import { UsersTable } from '#src/components/users-table.gts';
+import UsersTable from '#src/components/users-table.gts';
 import type { TOC } from '@ember/component/template-only';
 import { pageTitle } from 'ember-page-title';
 

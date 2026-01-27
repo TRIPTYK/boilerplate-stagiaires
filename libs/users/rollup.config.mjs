@@ -13,6 +13,9 @@ const rootDirectory = dirname(fileURLToPath(import.meta.url));
 const babelConfig = resolve(rootDirectory, './babel.publish.config.cjs');
 const tsConfig = resolve(rootDirectory, './tsconfig.publish.json');
 
+console.log('bloup');
+
+
 export default {
   output: addon.output(),
   plugins: [

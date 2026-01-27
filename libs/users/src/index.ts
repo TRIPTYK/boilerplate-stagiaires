@@ -6,6 +6,8 @@ export function moduleRegistry() {
   return buildRegistry({
     ...import.meta.glob('./routes/**/*.{js,ts}', { eager: true }),
     ...import.meta.glob('./templates/**/*.{js,ts}', { eager: true }),
+    ...import.meta.glob('./helpers/**/*.{js,ts}', { eager: true }),
+    ...import.meta.glob('./components/**/*.{js,ts}', { eager: true }),
     ...import.meta.glob('./services/**/*.{js,ts}', { eager: true })
   })();
 }

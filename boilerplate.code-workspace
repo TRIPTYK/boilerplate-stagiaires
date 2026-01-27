@@ -1,0 +1,13 @@
+{
+    "folders": [
+        {
+            "path": "libs/users"
+        },
+        {
+            "path": "front-app"
+        },
+        {
+            "path": "."
+        }
+    ]
+}

@@ -1,6 +1,6 @@
 
 import type { TOC } from "@ember/component/template-only";
-import DummyForm from "#src/components/dummy-form.gts";
+import DummyForm from "#src/components/users-form.gts";
 
 const temp = <template>
   <DummyForm />

@@ -1,49 +1,50 @@
-/**
- * This babel.config is only used for publishing.
- *
- * For local dev experience, see the babel.config
- */
-const { buildMacros } = require('@embroider/macros/babel');
-const { setConfig } = require('@warp-drive/core/build-config');
+'use strict';
 
-const Macros = buildMacros({
-  configure: (config) => {
-    setConfig(config, {
-      compatWith: '5.6'
-    });
-  },
-});
+const {
+  babelCompatSupport,
+  templateCompatSupport,
+} = require('@embroider/compat/babel');
 
 module.exports = {
   plugins: [
-    [
-      'ember-concurrency/async-arrow-task-transform',
-      {}
-    ],
+    ['ember-concurrency/async-arrow-task-transform', {}],
     [
       '@babel/plugin-transform-typescript',
       {
         allExtensions: true,
-        allowDeclareFields: true,
         onlyRemoveTypeImports: true,
+        allowDeclareFields: true,
       },
     ],
     [
       'babel-plugin-ember-template-compilation',
       {
-        targetFormat: 'hbs',
-        transforms: [],
+        compilerPath: 'ember-source/dist/ember-template-compiler.js',
+        enableLegacyModules: [
+          'ember-cli-htmlbars',
+          'ember-cli-htmlbars-inline-precompile',
+          'htmlbars-inline-precompile',
+        ],
+        transforms: [...templateCompatSupport()],
       },
     ],
     [
       'module:decorator-transforms',
       {
         runtime: {
-          import: 'decorator-transforms/runtime-esm',
+          import: require.resolve('decorator-transforms/runtime-esm'),
         },
       },
     ],
-    ...Macros.babelMacros,
+    [
+      '@babel/plugin-transform-runtime',
+      {
+        absoluteRuntime: __dirname,
+        useESModules: true,
+        regenerator: false,
+      },
+    ],
+    ...babelCompatSupport(),
   ],
 
   generatorOpts: {

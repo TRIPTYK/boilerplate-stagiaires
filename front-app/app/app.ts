@@ -8,7 +8,8 @@ import setupInspector from '@embroider/legacy-inspector-support/ember-source-4.1
 import "front-app/styles/app.css";
 import IntlService from 'ember-intl/services/intl';
 import PageTitleService from 'ember-page-title/services/page-title';
-import { moduleRegistry as userLibRegistry, initialize } from '@libs/users';
+import { moduleRegistry as userLibRegistry } from '@libs/users';
+import { moduleRegistry as emberInputValidationRegistry } from '@triptyk/ember-input-validation';
 
 // @ts-expect-error: setWarpDriveLogging is globally available after importing '@warp-drive/ember/install'
 setWarpDriveLogging({
@@ -24,19 +25,21 @@ if (macroCondition(isDevelopingApp())) {
 export default class App extends ApplicationStrict {
   podModulePrefix = config.podModulePrefix;
   inspector = setupInspector(this);
+
+
   modules = {
-    ...compatModules,
     ...import.meta.glob('./router.*', { eager: true }),
     ...import.meta.glob('./templates/**/*', { eager: true }),
     ...import.meta.glob('./services/**/*', { eager: true }),
     ...import.meta.glob('./routes/**/*', { eager: true }),
     ...import.meta.glob('./components/**/*', { eager: true }),
     ...import.meta.glob('./config/**/*', { eager: true }),
+    ...userLibRegistry(),
+    ...emberInputValidationRegistry(),
     // third party services, there is no better way to load them currently
     './services/intl': { default: IntlService},
     './services/page-title': { default: PageTitleService},
     ...compatModules,
-    ...userLibRegistry(),
   }
 }
 

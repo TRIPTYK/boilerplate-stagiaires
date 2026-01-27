@@ -9,10 +9,13 @@ const {
   babelCompatSupport,
   templateCompatSupport,
 } = require('@embroider/compat/babel');
+const { setConfig } = require('@warp-drive/core/build-config');
 
-const macros = buildMacros({
-  setConfig: {
-
+const Macros = buildMacros({
+  configure: (config) => {
+    setConfig(config, {
+      compatWith: '5.6'
+    });
   },
 });
 
@@ -43,7 +46,7 @@ module.exports = {
           'htmlbars-inline-precompile',
         ],
         transforms: [
-          ...(isCompat ? templateCompatSupport() : macros.templateMacros),
+          ...(isCompat ? templateCompatSupport() : Macros.templateMacros),
         ],
       },
     ],
@@ -63,7 +66,7 @@ module.exports = {
         regenerator: false,
       },
     ],
-    ...(isCompat ? babelCompatSupport() : macros.babelMacros),
+    ...(isCompat ? babelCompatSupport() : Macros.babelMacros),
   ],
 
   generatorOpts: {

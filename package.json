@@ -13,7 +13,7 @@
   "pnpm": {
     "overrides": {
       "zod": "^4.0.0",
-      "@embroider/util": "1.13.2"
+      "ember-basic-dropdown": "git+https://github.com/cibernox/ember-basic-dropdown/tree/dist"
     },
     "patchedDependencies": {
       "@embroider/vite": "patches/@embroider__vite.patch",

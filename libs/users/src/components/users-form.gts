@@ -4,8 +4,10 @@ import { action } from '@ember/object';
 import { ImmerChangeset } from 'ember-immer-changeset';
 import { object, string, date, boolean, array, email } from 'zod';
 import TpkForm from '@triptyk/ember-input-validation/components/tpk-form';
+import type Owner from '@ember/owner';
+import { on } from '@ember/modifier';
 
-export default class DummyFormComponent extends Component {
+export default class UsersFormComponent extends Component {
   @tracked changeset = new ImmerChangeset({
     firstName: '',
     lastName: '',
@@ -17,6 +19,8 @@ export default class DummyFormComponent extends Component {
     agreed: false,
     description: '',
   });
+
+  @tracked counter = 0;
 
   validationSchema = object({
     firstName: string().min(2, 'At least 2 characters'),
@@ -31,10 +35,10 @@ export default class DummyFormComponent extends Component {
   });
 
   languageOptions = [
-    { value: 'fr', label: 'French' },
-    { value: 'en', label: 'English' },
-    { value: 'es', label: 'Spanish' },
-    { value: 'de', label: 'German' },
+    { value: 'fr', label: 'French', toString() { return this.label; } },
+    { value: 'en', label: 'English', toString() { return this.label; } },
+    { value: 'es', label: 'Spanish', toString() { return this.label; } },
+    { value: 'de', label: 'German', toString() { return this.label; } },
   ];
 
   @action
@@ -44,13 +48,13 @@ export default class DummyFormComponent extends Component {
   }
 
   @action
-  onChange(value: any) {
+  onChange(value: unknown) {
     console.log('Value changed:', value);
   }
 
   <template>
-    <div class="dummy-form-container">
-      <h2>Dummy Form</h2>
+    <div class="users-form-container">
+      <h2>Users Form</h2>
       <TpkForm
         @changeset={{this.changeset}}
         @onSubmit={{this.onSubmit}}
