@@ -18,7 +18,15 @@
     "patchedDependencies": {
       "@embroider/vite": "patches/@embroider__vite.patch",
       "ember-power-select-with-create": "patches/ember-power-select-with-create.patch"
-    }
+    },
+    "onlyBuiltDependencies": [
+      "core-js",
+      "core-js-pure",
+      "edgedriver",
+      "esbuild",
+      "geckodriver",
+      "msw"
+    ]
   },
   "devDependencies": {
     "backend-app": "workspace:^",

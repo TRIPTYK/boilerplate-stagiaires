@@ -14,7 +14,7 @@ module('tpk-form', function(hooks) {
   test('Should pass errors to the prefab inputs when the changeset is invalid upon submission', async function(assert) {
     const changeset = new ImmerChangeset({});
     const schema = object({
-      name: string().min(10, 'Too small: expected string to have >=10 characters'),
+      firstName: string().min(10, 'Too small: expected string to have >=10 characters'),
       email: string().email('Invalid email address'),
     });
 

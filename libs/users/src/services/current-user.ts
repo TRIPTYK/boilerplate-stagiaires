@@ -25,7 +25,7 @@ export default class CurrentUserService extends Service {
     }
 
     const response = await this.store.request<User>({
-      url: "/users/profile",
+      url: "/api/v1/users/profile",
       method: "GET",
     });
 

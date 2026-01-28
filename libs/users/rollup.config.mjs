@@ -3,6 +3,7 @@ import { Addon } from '@embroider/addon-dev/rollup';
 import { fileURLToPath } from 'node:url';
 import { resolve, dirname } from 'node:path';
 import alias from '@rollup/plugin-alias';
+import { moveRouteTemplatesPlugin, fileNameMapper } from '@libs/utils/configs/addon/mapper-plugin.mjs';
 
 const addon = new Addon({
   srcDir: 'src',
@@ -21,6 +22,8 @@ export default {
         { find: '#src', replacement: resolve(rootDirectory, 'src') },
       ]
     }),
+    // Move route template files to templates directory
+    moveRouteTemplatesPlugin(),
     // These are the modules that users should be able to import from your
     // addon. Anything not listed here may get optimized away.
     // By default all your JavaScript modules (**/*.js) will be importable.
@@ -43,7 +46,10 @@ export default {
       'http-mocks/**/*.js',
       'templates/**/*.js',
       'schemas/**/*.js',
-    ]),
+    ], {
+      mapFilename: fileNameMapper,
+    }),
+
 
     // Follow the V2 Addon rules about dependencies. Your code can import from
     // `dependencies` and `peerDependencies` as well as standard Ember-provided

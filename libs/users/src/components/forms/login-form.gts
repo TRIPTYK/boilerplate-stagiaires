@@ -7,7 +7,7 @@ import TpkForm from '@triptyk/ember-input-validation/components/tpk-form';
 import { service } from '@ember/service';
 import type SessionService from 'ember-simple-auth/services/session';
 
-export default class LoginFormComponent extends Component {
+export default class LoginForm extends Component {
   @service declare session: SessionService;
 
   @tracked changeset = new ImmerChangeset({

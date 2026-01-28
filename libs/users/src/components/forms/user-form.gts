@@ -1,0 +1,51 @@
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { object, string, email } from 'zod';
+import TpkForm from '@triptyk/ember-input-validation/components/tpk-form';
+import { service } from '@ember/service';
+import type UserService from '#src/services/user.ts';
+import type { UserChangeset } from '#src/changesets/user.ts';
+import { UserValidationSchema } from '#src/components/forms/user-validation.ts';
+import type RouterService from '@ember/routing/router-service';
+
+interface UsersFormArgs {
+  changeset: UserChangeset;
+}
+
+export default class UsersForm extends Component<UsersFormArgs> {
+  @service declare user: UserService;
+  @service declare router: RouterService;
+
+  validationSchema = object({
+    firstName: string().min(2, 'At least 2 characters'),
+    lastName: string().min(2, 'At least 2 characters'),
+    email: email('Invalid email')
+  });
+
+  onSubmit = async () => {
+    // we cannot fully guarentee that the changeset is valid here, so we re-validate using the schema.
+    const data = await UserValidationSchema.parseAsync(this.args.changeset.data);
+    await this.user.save(data);
+    await this.router.transitionTo('dashboard.users');
+  }
+
+  onChange = (value: unknown) => {
+    console.log('Value changed:', value);
+  }
+
+  <template>
+    <div class="users-form-container">
+      <h2>Users Form</h2>
+      <TpkForm
+        @changeset={{@changeset}}
+        @onSubmit={{this.onSubmit}}
+        @validationSchema={{this.validationSchema}}
+      as |F|>
+        <F.TpkInputPrefab @label="First Name" @validationField="firstName" />
+        <F.TpkInputPrefab @label="Last Name" @validationField="lastName" />
+        <F.TpkEmailPrefab @label="Email" @validationField="email" />
+        <button type="submit">Submit</button>
+      </TpkForm>
+    </div>
+  </template>
+}

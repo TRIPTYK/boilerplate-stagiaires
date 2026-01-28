@@ -1,8 +1,12 @@
 import { useLegacyStore } from '@warp-drive/legacy';
 import { JSONAPICache } from '@warp-drive/json-api';
 import UserSchema from '@libs/users/schemas/users';
-import { Fetch } from '@warp-drive/core';
-import AuthHandler from '@libs/users/handlers/auth';
+import { setBuildURLConfig } from '@warp-drive/utilities';
+
+setBuildURLConfig({
+  host: null,
+  namespace: 'api/v1'
+});
 
 const legacyStore = useLegacyStore({
   linksMode: false,

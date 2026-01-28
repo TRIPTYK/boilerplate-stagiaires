@@ -22,7 +22,7 @@ module.exports = function (environment) {
 
   if (environment === 'development') {
     ENV['ember-simple-auth-token'] = {
-      serverTokenEndpoint: '/auth/login',
+      serverTokenEndpoint: 'api/v1/auth/login',
       tokenPropertyName: 'data.accessToken',
       refreshTokenPropertyName: 'data.refreshToken',
       headers: {}
