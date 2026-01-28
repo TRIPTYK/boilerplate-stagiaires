@@ -2,8 +2,7 @@ import type RouterService from '@ember/routing/router-service';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import TableGenericPrefab, { type TableParams } from '@triptyk/ember-ui/components/prefabs/tpk-table-generic-prefab';
-
-
+import TpkButton from '@triptyk/ember-input/components/prefabs/tpk-prefab-button';
 
 class UsersTable extends Component<object> {
   @service declare router: RouterService;
@@ -35,8 +34,12 @@ class UsersTable extends Component<object> {
     actionMenu: [],
   };
 
+  onAddUser = () => {
+    this.router.transitionTo('dashboard.users.create');
+  }
+
   <template>
-    <h1>Users Table</h1>
+    <TpkButton @label="Add User" @onClick={{this.onAddUser}} />
     <TableGenericPrefab @tableParams={{this.tableParams}} />
   </template>;
 }

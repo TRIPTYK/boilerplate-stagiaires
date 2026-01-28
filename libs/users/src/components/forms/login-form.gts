@@ -20,8 +20,7 @@ export default class LoginForm extends Component {
     password: string().min(8, 'Password must be at least 8 characters'),
   });
 
-  @action
-  async onSubmit(changeset: typeof this.changeset) {
+  onSubmit = async (changeset: typeof this.changeset) => {
     await this.session.authenticate('authenticator:jwt', {
       email: changeset.get('email'),
       password: changeset.get('password'),
