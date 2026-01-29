@@ -1,5 +1,5 @@
 // vite.config.js
-import { webdriverio } from "@vitest/browser-webdriverio";
+import { playwright } from '@vitest/browser-playwright';
 import { defineConfig } from "vite";
 import tailwindcss from '@tailwindcss/vite'
 
@@ -13,12 +13,12 @@ export default defineConfig({
     include: ["tests/**/*-test.{gjs,gts}"],
     maxConcurrency: 1,
     browser: {
-      provider: webdriverio(),
+      provider: playwright(),
       enabled: true,
       headless: false,
       // at least one instance is required
       instances: [
-        { browser: "chrome" },
+        { browser: "chromium" },
         // { browser: 'firefox' },
         // { browser: 'edge' },
         // { browser: 'safari' },

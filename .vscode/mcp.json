@@ -3,6 +3,12 @@
     "ember": {
       "command": "npx",
       "args": ["-y", "ember-mcp"]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest"
+      ]
     }
   }
 }

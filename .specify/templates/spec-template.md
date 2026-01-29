@@ -4,6 +4,7 @@
 **Created**: [DATE]  
 **Status**: Draft  
 **Input**: User description: "$ARGUMENTS"
+**Constitution**: Refer to `.specify/memory/constitution.md` v1.1.0 for quality, testing, UX, and performance requirements
 
 ## User Scenarios & Testing *(mandatory)*
 
