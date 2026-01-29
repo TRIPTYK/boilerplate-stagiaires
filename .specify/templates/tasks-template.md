@@ -8,7 +8,7 @@ description: "Task list template for feature implementation"
 **Input**: Design documents from `/specs/[###-feature-name]/`
 **Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, contracts/
 
-**Tests**: The examples below include test tasks. Tests are OPTIONAL - only include them if explicitly requested in the feature specification.
+**Tests**: Per constitution v1.1.0, tests are MANDATORY (NON-NEGOTIABLE) - all user stories MUST have tests written FIRST (Red-Green-Refactor).
 
 **Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
 
@@ -20,10 +20,11 @@ description: "Task list template for feature implementation"
 
 ## Path Conventions
 
-- **Single project**: `src/`, `tests/` at repository root
-- **Web app**: `backend/src/`, `frontend/src/`
-- **Mobile**: `api/src/`, `ios/src/` or `android/src/`
-- Paths shown below assume single project - adjust based on plan.md structure
+- **Monorepo**: `libs/[feature]/src/`, `libs/[feature]/tests/` for library code
+- **Application**: `front-app/app/`, `front-app/tests/` for app code
+- **E2E Tests**: `front-app/e2e/` for Playwright tests
+- **HTTP Mocks**: `libs/[feature]/src/http-mocks/` for MSW handlers
+- Paths shown below assume monorepo structure - adjust based on plan.md structure
 
 <!-- 
   ============================================================================
@@ -48,9 +49,10 @@ description: "Task list template for feature implementation"
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Create project structure per implementation plan
-- [ ] T002 Initialize [language] project with [framework] dependencies
-- [ ] T003 [P] Configure linting and formatting tools
+- [ ] T001 Create projTypeScript library with v2 addon dependencies (if library feature)
+- [ ] T003 [P] Configure linting (ESLint, ember-template-lint, Stylelint) and Prettier
+- [ ] T004 [P] Setup Vitest configuration in `vite.config.mts`
+- [ ] T005 [P] Setup Playwright configuration in `playwright.config.ts` (if E2E needed)
 
 ---
 
@@ -62,11 +64,12 @@ description: "Task list template for feature implementation"
 
 Examples of foundational tasks (adjust based on your project):
 
-- [ ] T004 Setup database schema and migrations framework
-- [ ] T005 [P] Implement authentication/authorization framework
-- [ ] T006 [P] Setup API routing and middleware structure
-- [ ] T007 Create base models/entities that all stories depend on
-- [ ] T008 Configure error handling and logging infrastructure
+- [ ] T006 Setup Warp Drive schema definitions (if new entities)
+- [ ] T007 [P] Setup authentication/authorization integration (if needed)
+- [ ] T008 [P] Define MSW handlers in `src/http-mocks/` for API mocking
+- [ ] T009 Create base components/services that all stories depend on
+- [ ] T010 Configure error handling with `ember-cli-flash`
+- [ ] T011 Setup ember-intl translations structure in `translations/`structure
 - [ ] T009 Setup environment configuration management
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
@@ -77,21 +80,25 @@ Examples of foundational tasks (adjust based on your project):
 
 **Goal**: [Brief description of what this story delivers]
 
-**Independent Test**: [How to verify this story works on its own]
-
-### Tests for User Story 1 (OPTIONAL - only if tests requested) ⚠️
+**Independent Test**: [How tMANDATORY - Constitution v1.1.0 requires test-first) ⚠️
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T010 [P] [US1] Contract test for [endpoint] in tests/contract/test_[name].py
-- [ ] T011 [P] [US1] Integration test for [user journey] in tests/integration/test_[name].py
+- [ ] T012 [P] [US1] Vitest integration test for [component] in `libs/[feature]/tests/integration/[name]-test.gts`
+- [ ] T013 [P] [US1] Define Page Object for [component] interactions (exported from component file)
+- [ ] T014 [P] [US1] Playwright E2E test for [user journey] in `front-app/e2e/[name].spec.ts` (if app feature)
+- [ ] T015 [P] [US1] MSW handlers for [API endpoints] in `src/http-mocks/[entity].ts`
 
 ### Implementation for User Story 1
 
-- [ ] T012 [P] [US1] Create [Entity1] model in src/models/[entity1].py
-- [ ] T013 [P] [US1] Create [Entity2] model in src/models/[entity2].py
-- [ ] T014 [US1] Implement [Service] in src/services/[service].py (depends on T012, T013)
-- [ ] T015 [US1] Implement [endpoint/feature] in src/[location]/[file].py
+- [ ] T016 [P] [US1] Create Warp Drive schema in `src/schemas/[entity].ts`
+- [ ] T017 [P] [US1] Create Zod validation schema in `src/components/forms/[entity]-validation.ts`
+- [ ] T018 [P] [US1] Create `[Entity]Changeset` extending `ImmerChangeset` in `src/changesets/[entity].ts`
+- [ ] T019 [US1] Implement Glimmer component in `src/components/[name].gts` with Page Object export
+- [ ] T020 [US1] Integrate TripTyk components (`TpkForm`, `TpkInputPrefab`, etc.) in form
+- [ ] T021 [US1] Add ember-intl translations in `translations/en-us.json`
+- [ ] T022 [US1] Add validation and error handling with `ember-cli-flash`
+- [ ] T023 [US1] Verify all tests pass (Vitest + Playwright)cation]/[file].py
 - [ ] T016 [US1] Add validation and error handling
 - [ ] T017 [US1] Add logging for user story 1 operations
 
@@ -99,17 +106,21 @@ Examples of foundational tasks (adjust based on your project):
 
 ---
 
-## Phase 4: User Story 2 - [Title] (Priority: P2)
+## Phase 4: User Story 2 - [MANDATORY - Constitution v1.1.0 requires test-first) ⚠️
 
-**Goal**: [Brief description of what this story delivers]
+- [ ] T024 [P] [US2] Vitest integration test for [component] in `libs/[feature]/tests/integration/[name]-test.gts`
+- [ ] T025 [P] [US2] Define Page Object for [component] interactions (exported from component file)
+- [ ] T026 [P] [US2] Playwright E2E test for [user journey] in `front-app/e2e/[name].spec.ts` (if app feature)
+- [ ] T027 [P] [US2] MSW handlers for [API endpoints] in `src/http-mocks/[entity].ts`
 
-**Independent Test**: [How to verify this story works on its own]
+### Implementation for User Story 2
 
-### Tests for User Story 2 (OPTIONAL - only if tests requested) ⚠️
-
-- [ ] T018 [P] [US2] Contract test for [endpoint] in tests/contract/test_[name].py
-- [ ] T019 [P] [US2] Integration test for [user journey] in tests/integration/test_[name].py
-
+- [ ] T028 [P] [US2] Create Warp Drive schema in `src/schemas/[entity].ts`
+- [ ] T029 [P] [US2] Create Zod validation schema in `src/components/forms/[entity]-validation.ts`
+- [ ] T030 [US2] Implement Glimmer component in `src/components/[name].gts` with Page Object
+- [ ] T031 [US2] Integrate with User Story 1 components (if needed)
+- [ ] T032 [US2] Add ember-intl translations
+- [ ] T033 [US2] Verify all tests pass
 ### Implementation for User Story 2
 
 - [ ] T020 [P] [US2] Create [Entity] model in src/models/[entity].py
@@ -119,16 +130,20 @@ Examples of foundational tasks (adjust based on your project):
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 
----
+---MANDATORY - Constitution v1.1.0 requires test-first) ⚠️
 
-## Phase 5: User Story 3 - [Title] (Priority: P3)
+- [ ] T034 [P] [US3] Vitest integration test for [component] in `libs/[feature]/tests/integration/[name]-test.gts`
+- [ ] T035 [P] [US3] Define Page Object for [component] interactions (exported from component file)
+- [ ] T036 [P] [US3] Playwright E2E test for [user journey] in `front-app/e2e/[name].spec.ts` (if app feature)
+- [ ] T037 [P] [US3] MSW handlers for [API endpoints] in `src/http-mocks/[entity].ts`
 
-**Goal**: [Brief description of what this story delivers]
+### Implementation for User Story 3
 
-**Independent Test**: [How to verify this story works on its own]
-
-### Tests for User Story 3 (OPTIONAL - only if tests requested) ⚠️
-
+- [ ] T038 [P] [US3] Create Warp Drive schema in `src/schemas/[entity].ts`
+- [ ] T039 [P] [US3] Create Zod validation schema in `src/components/forms/[entity]-validation.ts`
+- [ ] T040 [US3] Implement Glimmer component in `src/components/[name].gts` with Page Object
+- [ ] T041 [US3] Add ember-intl translations
+- [ ] T042 [US3] Verify all tests pass
 - [ ] T024 [P] [US3] Contract test for [endpoint] in tests/contract/test_[name].py
 - [ ] T025 [P] [US3] Integration test for [user journey] in tests/integration/test_[name].py
 
@@ -138,12 +153,14 @@ Examples of foundational tasks (adjust based on your project):
 - [ ] T027 [US3] Implement [Service] in src/services/[service].py
 - [ ] T028 [US3] Implement [endpoint/feature] in src/[location]/[file].py
 
-**Checkpoint**: All user stories should now be independently functional
-
----
-
-[Add more user story phases as needed, following the same pattern]
-
+**Checkpoint**: All user stories should README.md or docs/
+- [ ] TXXX Code cleanup and refactoring (DRY violations, magic numbers, etc.)
+- [ ] TXXX Performance optimization across all stories (bundle size, Lighthouse scores)
+- [ ] TXXX [P] Additional unit tests for edge cases (if needed beyond integration tests)
+- [ ] TXXX Accessibility audit and fixes (keyboard nav, ARIA labels, color contrast)
+- [ ] TXXX Security hardening (input sanitization, CSRF protection, etc.)
+- [ ] TXXX Run quickstart.md validation (if quickstart guide exists)
+- [ ] TXXX Verify Constitution compliance (all principles checked)
 ---
 
 ## Phase N: Polish & Cross-Cutting Concerns
@@ -168,21 +185,12 @@ Examples of foundational tasks (adjust based on your project):
 - **User Stories (Phase 3+)**: All depend on Foundational phase completion
   - User stories can then proceed in parallel (if staffed)
   - Or sequentially in priority order (P1 → P2 → P3)
-- **Polish (Final Phase)**: Depends on all desired user stories being complete
-
-### User Story Dependencies
-
-- **User Story 1 (P1)**: Can start after Foundational (Phase 2) - No dependencies on other stories
-- **User Story 2 (P2)**: Can start after Foundational (Phase 2) - May integrate with US1 but should be independently testable
-- **User Story 3 (P3)**: Can start after Foundational (Phase 2) - May integrate with US1/US2 but should be independently testable
-
-### Within Each User Story
-
-- Tests (if included) MUST be written and FAIL before implementation
-- Models before services
-- Services before endpoints
+- **PolisMANDATORY per constitution) MUST be written and FAIL before implementation
+- Warp Drive schemas before changesets
+- Changesets before components
+- Components with Page Objects exported
 - Core implementation before integration
-- Story complete before moving to next priority
+- Story tests pass before moving to next priority
 
 ### Parallel Opportunities
 
@@ -190,10 +198,21 @@ Examples of foundational tasks (adjust based on your project):
 - All Foundational tasks marked [P] can run in parallel (within Phase 2)
 - Once Foundational phase completes, all user stories can start in parallel (if team capacity allows)
 - All tests for a user story marked [P] can run in parallel
-- Models within a story marked [P] can run in parallel
-- Different user stories can be worked on in parallel by different team members
+- Schemas and validation schemaces before endpoints
+- Core implementation before integration
+- Story complete before moving to next priority
 
----
+### Parallel Opportunities
+
+- All Setup tasks marked [P] can run in parallel
+- All Foundational tasks marked [P] can run inMANDATORY per constitution):
+Task: "Vitest integration test for [component] in libs/[feature]/tests/integration/[name]-test.gts"
+Task: "Playwright E2E test for [user journey] in front-app/e2e/[name].spec.ts"
+Task: "MSW handlers for [API endpoints] in src/http-mocks/[entity].ts"
+
+# Launch schemas and validation together:
+Task: "Create Warp Drive schema in src/schemas/[entity].ts"
+Task: "Create Zod validation schema in src/components/forms/[entity]-validation.ts
 
 ## Parallel Example: User Story 1
 

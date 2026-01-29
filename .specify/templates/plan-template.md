@@ -30,41 +30,73 @@
 ## Constitution Check
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+*Reference: `.specify/memory/constitution.md` v1.1.0*
 
 **Code Quality & Maintainability**
-- [ ] TypeScript enabled with strict checking
-- [ ] Components use Glimmer + `.gts` format
-- [ ] Linting configured (ESLint, Stylelint, ember-template-lint)
-- [ ] Prettier formatting configured
-- [ ] Accessibility requirements documented
+- [ ] TypeScript strict mode enabled (`tsconfig.json` with `strict: true`)
+- [ ] Components use Glimmer + `.gts` template-tag format
+- [ ] Linting configured (ESLint v9+, ember-template-lint v7+, Stylelint v16+)
+- [ ] Prettier with `prettier-plugin-ember-template-tag` configured
+- [ ] Accessibility requirements documented (keyboard nav + screen readers)
+- [ ] Zod schemas defined for all form validation (`components/forms/*-validation.ts`)
+- [ ] Page Objects exported for all interactive components
+- [ ] All user-facing text uses ember-intl (no hardcoded strings)
 
 **Testing Standards** *(NON-NEGOTIABLE)*
 - [ ] Test-first workflow planned (tests → approval → fail → implement)
-- [ ] Component tests planned for all UI components
-- [ ] Integration tests planned for critical user journeys
-- [ ] Test organization follows convention (`tests/integration/`, `tests/unit/`)
+- [ ] Vitest v4+ with `ember-vitest` configured for unit/integration tests
+- [ ] Playwright v1.58+ configured for E2E tests in `e2e/` directory
+- [ ] Component tests planned for all library components (`libs/*/tests/integration/`)
+- [ ] E2E tests planned for critical user journeys (Playwright in `front-app/e2e/`)
+- [ ] MSW v2+ handlers defined for all HTTP mocking (`http-mocks/*.ts`)
+- [ ] Page Objects used in tests (no low-level selector duplication)
+- [ ] Integration tests use `expect.soft` for soft assertions
+- [ ] Test organization mirrors source structure
 
 **User Experience Consistency**
-- [ ] Design system compliance documented
-- [ ] Loading states specified for async operations
-- [ ] Error handling approach defined
+- [ ] TripTyk component library used (`@triptyk/ember-ui`, `@triptyk/ember-input*`)
+- [ ] Forms use `TpkForm` with prefabs and Zod validation
+- [ ] Loading states with `ember-concurrency` tasks (<100ms indicators)
+- [ ] Error handling uses `ember-cli-flash` (no raw stack traces)
 - [ ] Responsive design requirements (320px, 768px, 1440px+)
+- [ ] Tailwind CSS v4+ with DaisyUI v5+ for styling
+- [ ] ember-intl v8+ translations defined in `translations/` directory
 - [ ] Performance budget defined (<3s initial load, <100ms interactions)
 
 **Performance Requirements**
 - [ ] Bundle size targets set (<300KB initial, <1MB total gzipped)
-- [ ] Code splitting strategy defined (lazy routes, vendor chunks)
-- [ ] Asset optimization plan (WebP/AVIF images, CSS purging)
+- [ ] Vite v7+ with Embroider v4+ build pipeline
+- [ ] Turbo v2+ configured for monorepo build caching
+- [ ] MSW configured for instant dev without backend (`http-mocks/`)
+- [ ] Code splitting strategy (lazy routes via Embroider)
+- [ ] Asset optimization plan (WebP/AVIF images, Tailwind purging)
 - [ ] Runtime performance targets (<16ms render, <50ms blocking)
+- [ ] State management uses `tracked-built-ins` + `ember-immer-changeset`
 - [ ] Lighthouse score targets (Perf ≥90, A11y ≥95, BP ≥90)
+- [ ] Playwright Lighthouse CI integration planned
 
 **Technology Stack Compliance**
-- [ ] Using Ember.js v6.9+ (Octane)
-- [ ] Using Vite v7+ with Embroider
-- [ ] Using TypeScript v5.9+
-- [ ] Using pnpm v10+ workspaces
-- [ ] No prohibited patterns (classic components, mixins, `any` types, inline styles)
-- [ ] New dependencies justified (if any)
+- [ ] Using Ember.js v6.10+ (Octane edition)
+- [ ] Using Vite v7+ with Embroider v4+
+- [ ] Using TypeScript v5.9+ with strict mode
+- [ ] Using pnpm v10+ workspaces (`pnpm-workspace.yaml`)
+- [ ] Using Turbo v2+ for monorepo builds (`turbo.json`)
+- [ ] Using `@warp-drive/core` (Ember Data 5.8+) for API integration
+- [ ] Using `ember-immer-changeset` for form state
+- [ ] Using Zod v4+ for validation schemas
+- [ ] Using MSW v2+ with `openapi-msw` for mocks
+- [ ] Using `ember-simple-auth` v8+ for authentication
+- [ ] No prohibited patterns (classic components, mixins, `any` types, inline styles, hardcoded strings)
+- [ ] New dependencies justified (bundle size, maintenance, alternatives, Ember/Vite compatibility)
+
+**Monorepo & Library Development** (if applicable)
+- [ ] Library in `libs/` follows v2 addon structure
+- [ ] Library has independent `package.json`, `tsconfig.json`, `vite.config.mts`
+- [ ] Library exports declarations in `declarations/` directory
+- [ ] Library uses `src/` for source, `dist-tests/` for compiled tests
+- [ ] Library defines integration points in `index.ts` (`forRouter()`, `initialize()`)
+- [ ] Turbo watch mode configured for live library rebuilds during dev
+- [ ] **AI Development Note**: When implementing library code, refer to `library-pack.txt` at repository root for code examples and patterns
 
 ## Project Structure
 
