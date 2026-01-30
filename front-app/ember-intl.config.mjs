@@ -1,5 +1,5 @@
 export default {
-  addonPaths: ['node_modules/@libs/users'],
+  addonPaths: [],
   buildOptions: {
     fallbackLocale: 'en-us',
     inputPath: 'translations',

@@ -3,9 +3,11 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import type CurrentUserService from '@libs/users/services/current-user';
 import TpkDashBoard from '@triptyk/ember-ui/components/prefabs/tpk-dashboard';
+import type SessionService from 'ember-simple-auth/services/session';
 
 export default class DashboardTemplate extends Component {
   @service declare currentUser: CurrentUserService;
+  @service declare session: SessionService;
 
   menuItems = [
     {
@@ -36,8 +38,12 @@ export default class DashboardTemplate extends Component {
     };
   }
 
+  logout = () => {
+    this.session.invalidate();
+  }
+
   <template>
-    <TpkDashBoard @currentUser={{this.userForNav}} @sidebarItems={{this.menuItems}}>
+    <TpkDashBoard @currentUser={{this.userForNav}} @onLogout={{this.logout}} @sidebarItems={{this.menuItems}}>
       {{outlet}}
     </TpkDashBoard>
   </template>
