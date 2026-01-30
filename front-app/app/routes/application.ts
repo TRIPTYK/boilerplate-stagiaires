@@ -26,8 +26,8 @@ export default class ApplicationRoute extends Route {
     await initializeUserLib(getOwner(this)!);
   }
 
-  destroy() {
+  willDestroy() {
     this.worker?.stop();
-    return super.destroy();
+    return super.willDestroy();
   }
 }

@@ -22,8 +22,6 @@ import ember from 'eslint-plugin-ember/recommended';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import n from 'eslint-plugin-n';
 
-import babelParser from '@babel/eslint-parser';
-
 const parserOptions = {
   esm: {
     js: {
@@ -37,7 +35,7 @@ const parserOptions = {
   },
 };
 
-export default ts.configs(
+export default ts.config(
   js.configs.recommended,
   ember.configs.base,
   ember.configs.gjs,
@@ -59,12 +57,6 @@ export default ts.configs(
     },
   },
   {
-    files: ['**/*.js'],
-    languageOptions: {
-      parser: babelParser,
-    },
-  },
-  {
     files: ['**/*.{js,gjs}'],
     languageOptions: {
       parserOptions: parserOptions.esm.js,
@@ -74,7 +66,7 @@ export default ts.configs(
     },
   },
   {
-    files: ['**/*.{ts,gts}'],
+    files: ['{app,tests}/*.{ts,gts}'],
     languageOptions: {
       parser: ember.parser,
       parserOptions: parserOptions.esm.ts,

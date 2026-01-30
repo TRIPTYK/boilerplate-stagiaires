@@ -4,7 +4,7 @@ import { visit } from "@ember/test-helpers";
 import App from "front-app/app";
 import { vi } from "vitest";
 
-vi.mock('@embroider/config-meta-loader', async () => {
+vi.mock('@embroider/config-meta-loader', () => {
   return {
     default: vi.fn(() => {
       return {

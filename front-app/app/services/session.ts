@@ -5,8 +5,9 @@ import SessionService from 'ember-simple-auth/services/session';
 export default class MySession extends SessionService {
     @service declare currentUser: CurrentUserService;
 
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     async handleAuthentication(routeAfterAuthentication: string): Promise<void> {
         await this.currentUser.load();
-        super.handleAuthentication(routeAfterAuthentication);
+        return super.handleAuthentication(routeAfterAuthentication);
     }
 }
