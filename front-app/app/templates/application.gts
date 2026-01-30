@@ -4,6 +4,7 @@ import Component from '@glimmer/component';
 import { service } from '@ember/service';
 import type FlashMessageService from 'ember-cli-flash/services/flash-messages';
 import component from '@ember/component/template-only';
+import { t } from 'ember-intl';
 
 interface ApplicationSignature {
   Args: {

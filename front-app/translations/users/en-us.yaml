@@ -1,0 +1,33 @@
+table:
+  headers:
+    firstName: 'First Name'
+    lastName: 'Last Name'
+    email: 'Email'
+  actions:
+    addUser: 'Add User'
+
+forms:
+  login:
+    title: 'Login'
+    validation:
+      invalidEmail: 'Please enter a valid email address'
+      passwordTooShort: 'Password must be at least 8 characters'
+
+  user:
+    labels:
+      firstName: 'First Name'
+      lastName: 'Last Name'
+      email: 'Email'
+    validation:
+      firstNameRequired: 'First name is required'
+      lastNameRequired: 'Last name is required'
+      invalidEmail: 'Invalid email address'
+      minLength: 'At least 2 characters'
+    actions:
+      submit: 'Submit'
+    messages:
+      saveSuccess: 'User saved successfully.'
+
+pages:
+  list:
+    title: 'User List'

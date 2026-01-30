@@ -1,38 +1,42 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { ImmerChangeset } from 'ember-immer-changeset';
-import TpkForm from '@triptyk/ember-input-validation/components/tpk-form';
 import { service } from '@ember/service';
 import type SessionService from 'ember-simple-auth/services/session';
 import { clickable, create, fillable } from 'ember-cli-page-object';
-import LoginValidationSchema from './login-validation.ts';
+import { createLoginValidationSchema } from './login-validation.ts';
 import type z from 'zod';
+import TpkLoginForm from '@triptyk/ember-ui/components/prefabs/tpk-login';
+import type CurrentUserService from '#src/services/current-user.ts';
+import { t } from 'ember-intl';
+import type { IntlService } from 'ember-intl';
 
 export default class LoginForm extends Component {
   @service declare session: SessionService;
+  @service declare currentUser: CurrentUserService;
+  @service declare intl: IntlService;
 
   @tracked changeset = new ImmerChangeset({
     email: '',
     password: '',
   });
 
-  onSubmit = async (data: z.infer<typeof LoginValidationSchema>) => {
-    await this.session.authenticate('authenticator:jwt', data)
+  get loginValidationSchema(): ReturnType<typeof createLoginValidationSchema> {
+    return createLoginValidationSchema(this.intl);
+  }
+
+  onSubmit = async (data: z.infer<ReturnType<typeof createLoginValidationSchema>>) => {
+    await this.session.authenticate('authenticator:jwt', data);
+    await this.currentUser.load();
   }
 
   <template>
     <div class="login-form-container" data-test-login-form>
-      <h2>Login</h2>
-      <TpkForm
-        @changeset={{this.changeset}}
+      <h2>{{t "users.forms.login.title"}}</h2>
+      <TpkLoginForm
         @onSubmit={{this.onSubmit}}
-        @reactive={{true}}
-        @validationSchema={{LoginValidationSchema}}
-      as |F|>
-        <F.TpkEmailPrefab @label="Email" @validationField="email" />
-        <F.TpkPasswordPrefab @label="Password" @validationField="password" />
-        <button type="submit">Login</button>
-      </TpkForm>
+        @loginSchema={{this.loginValidationSchema}}
+      />
     </div>
   </template>
 }
