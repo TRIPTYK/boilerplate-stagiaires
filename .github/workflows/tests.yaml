@@ -10,4 +10,4 @@ jobs:
       - uses: actions/checkout@v4
       - uses: wyvox/action-setup-pnpm@v3
       - name: Run tests
-        run: pnpm turbo test
+        run: pnpm turbo lint test

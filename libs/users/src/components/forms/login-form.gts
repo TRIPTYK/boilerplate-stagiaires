@@ -27,7 +27,6 @@ export default class LoginForm extends Component {
 
   onSubmit = async (data: z.infer<ReturnType<typeof createLoginValidationSchema>>) => {
     await this.session.authenticate('authenticator:jwt', data);
-    await this.currentUser.load();
   }
 
   <template>
