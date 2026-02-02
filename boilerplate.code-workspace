@@ -1,10 +1,16 @@
 {
+    "settings": {
+        "typescript.experimental.useTsgo": true
+    },
     "folders": [
         {
             "path": "libs/users"
         },
         {
             "path": "front-app"
+        },
+        {
+            "path": "backend-app"
         },
         {
             "path": "libs/utils"

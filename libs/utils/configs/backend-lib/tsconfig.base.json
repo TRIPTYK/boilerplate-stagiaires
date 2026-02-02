@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "lib": [
+      "esnext"
+    ],
+    "resolveJsonModule": true,
+    "strict": true,
+    "noEmit": true,
+    "target": "esnext",
+    "incremental": true,
+    "moduleResolution": "NodeNext",
+    "module": "NodeNext",
+    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "noUnusedLocals": true,
+    "declaration": true,
+    "outDir": "dist",
+    "verbatimModuleSyntax": true,
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
+    "inlineSources": true,
+    "types": [
+      "vitest/importMeta"
+    ],
+    "sourceRoot": "/"
+  }
+}

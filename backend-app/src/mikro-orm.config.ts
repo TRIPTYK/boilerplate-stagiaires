@@ -10,4 +10,4 @@ const config = loadConfiguration();
  */
 seed(config.SEED);
 
-export default defineConfig(databaseConfig(config))
+export default defineConfig(databaseConfig(config));

@@ -2,14 +2,12 @@ import { App } from "@app/app/app.js";
 import { getTestContext } from "./test-context.js";
 
 export interface TestEnv {
-    app: App;
+  app: App;
 }
 
 export async function testEnv(): Promise<TestEnv> {
-    const context = await getTestContext();
-    return {
-        app: await App.init(
-            context.context
-        )
-    };
+  const context = await getTestContext();
+  return {
+    app: await App.init(context.context),
+  };
 }

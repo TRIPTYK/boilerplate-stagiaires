@@ -4,10 +4,6 @@ import { loadConfiguration } from "./configuration.js";
 
 const configuration = loadConfiguration();
 
-const app = await App.init(
-    await createApplicationContext(
-        configuration
-    )
-)
+const app = await App.init(await createApplicationContext(configuration));
 
 await app.start();

@@ -1,36 +1,10 @@
 {
-    "$schema": "https://json.schemastore.org/tsconfig",
-    "compilerOptions": {
-      "lib": [
-        "ES2022"
-      ],
-      "resolveJsonModule": true,
-      "strict": true,
-      "noEmit": true,
-      "target": "ES2022",
-      "incremental": true,
-      "moduleResolution": "NodeNext",
-      "module": "NodeNext",
-      "allowSyntheticDefaultImports": true,
-      "emitDecoratorMetadata": true,
-      "esModuleInterop": true,
-      "skipLibCheck": true,
-      "experimentalDecorators": true,
-      "noUnusedLocals": true,
-      "declaration": true,
-      "outDir": "dist",
-      "verbatimModuleSyntax": true,
-      "forceConsistentCasingInFileNames": true,
-      "sourceMap": true,
-      "inlineSources": true,
-      "types": [
-        "vitest/importMeta"
-      ],
-      "paths": {
-        "@app/*": ["./src/*"],
-        "@tests/*": ["./tests/*"] 
-      },
-      "sourceRoot": "/"
-    },
-    "include": ["src", "tests"]
+  "extends": "@libs/utils/configs/backend-lib/tsconfig.base.json",
+  "include": ["src", "tests"],
+  "compilerOptions": {
+    "paths": {
+      "@app/*": ["./src/*"],
+      "@tests/*": ["./tests/*"]
+    }
+  }
 }

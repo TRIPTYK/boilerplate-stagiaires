@@ -4,6 +4,7 @@
   "description": "",
   "exports": {
     "./configs/addon/*": "./configs/addon/*",
+    "./configs/backend-lib/*": "./configs/backend-lib/*",
     "./configs/app/*": "./configs/app/*"
   },
   "scripts": {

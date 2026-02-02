@@ -3,7 +3,7 @@
 ## Overview
 
 This is the backend service for the Portal application. It is built using Fastify and TypeScript.
-Don't forget to use turborepo for commands. 
+Don't forget to use turborepo for commands.
 
 ## Table of Contents
 
@@ -19,7 +19,6 @@ Don't forget to use turborepo for commands.
 
 Architecture à Layer.
 Les noms métiers sont en FRANCAIS. Pour l'instant ce sera une sorte de franglais. à voir si ça fonctionne bien. Par example "AjouterRessourceUseCase".
-
 
 ## Installation
 
