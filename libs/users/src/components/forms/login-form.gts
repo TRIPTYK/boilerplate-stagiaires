@@ -16,11 +16,6 @@ export default class LoginForm extends Component {
   @service declare currentUser: CurrentUserService;
   @service declare intl: IntlService;
 
-  @tracked changeset = new ImmerChangeset({
-    email: '',
-    password: '',
-  });
-
   get loginValidationSchema(): ReturnType<typeof createLoginValidationSchema> {
     return createLoginValidationSchema(this.intl);
   }

@@ -117,19 +117,17 @@
     "typescript": "^5.9.3",
     "typescript-eslint": "~8.54.0",
     "vite": "^7.2.4",
-    "vitest": "^4.0.17"
+    "vitest": "^4.0.17",
+    "ember-flatpickr": "^9.0.2",
+    "ember-immer-changeset": "~2.0.0",
+    "flatpickr": "^4.6.13",
+    "zod": "~4.3.6"
   },
   "engines": {
     "node": ">= 20"
   },
   "ember": {
     "edition": "octane"
-  },
-  "dependencies": {
-    "ember-flatpickr": "^9.0.2",
-    "ember-immer-changeset": "^1.0.2",
-    "flatpickr": "^4.6.13",
-    "zod": "~4.3.6"
   },
   "msw": {
     "workerDirectory": [
