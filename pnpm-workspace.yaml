@@ -134,12 +134,5 @@ catalog:
   vite-tsconfig-paths: ^6.0.5
   webpack: ^5.104.1
 
-onlyBuiltDependencies:
-  - core-js
-  - core-js-pure
-  - edgedriver
-  - esbuild
-  - geckodriver
-
 patchedDependencies:
   '@embroider/vite': patches/@embroider__vite.patch

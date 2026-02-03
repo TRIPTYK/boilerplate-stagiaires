@@ -16,7 +16,7 @@
             "path": "@libs/backend-shared"
         },
         {
-            "name": "@libs/users-front-front",
+            "name": "@libs/users-front",
             "path": "@libs/users-front"
         },
         {

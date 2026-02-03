@@ -30,7 +30,9 @@
       "edgedriver",
       "esbuild",
       "geckodriver",
+      "msw",
       "protobufjs",
+      "sqlite3",
       "ssh2"
     ]
   },

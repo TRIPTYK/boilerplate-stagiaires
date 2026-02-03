@@ -96,7 +96,6 @@
     "passport-http-bearer": "catalog:",
     "passport-jwt": "catalog:",
     "pdf-parse": "catalog:",
-    "sqlite3": "^5.1.7",
     "ts-node": "catalog:",
     "tsconfig-paths": "catalog:",
     "tsdown": "^0.20.1",
