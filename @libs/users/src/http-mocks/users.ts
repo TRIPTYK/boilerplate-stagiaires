@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpResponse } from 'msw';
 import type { paths } from '@apps/backend';
-import { createOpenApiHttp } from "openapi-msw";
+import { createOpenApiHttp } from 'openapi-msw';
 
 const mockUsers = [
   {
@@ -9,7 +12,7 @@ const mockUsers = [
     attributes: {
       firstName: 'John',
       lastName: 'Doe',
-      email: 'john.doe@example.com'
+      email: 'john.doe@example.com',
     },
   },
   {
@@ -18,7 +21,7 @@ const mockUsers = [
     attributes: {
       firstName: 'Jane',
       lastName: 'Smith',
-      email: 'jane.smith@example.com'
+      email: 'jane.smith@example.com',
     },
   },
   {
@@ -27,7 +30,7 @@ const mockUsers = [
     attributes: {
       firstName: 'Bob Johnson',
       lastName: 'Johnson',
-      email: 'bob.johnson@example.com'
+      email: 'bob.johnson@example.com',
     },
   },
 ];
@@ -51,9 +54,9 @@ export default [
       return HttpResponse.json(
         {
           message: 'Not Found',
-          code: 'USER_NOT_FOUND'
+          code: 'USER_NOT_FOUND',
         },
-        { status: 404 }
+        { status: 404 },
       );
     }
   }),
@@ -71,7 +74,11 @@ export default [
         const firstName = user.attributes.firstName.toLowerCase();
         const lastName = user.attributes.lastName.toLowerCase();
         const email = user.attributes.email.toLowerCase();
-        return firstName.includes(query) || lastName.includes(query) || email.includes(query);
+        return (
+          firstName.includes(query) ||
+          lastName.includes(query) ||
+          email.includes(query)
+        );
       });
     }
 
@@ -84,7 +91,11 @@ export default [
         let aValue: string | undefined;
         let bValue: string | undefined;
 
-        if (field === 'firstName' || field === 'lastName' || field === 'email') {
+        if (
+          field === 'firstName' ||
+          field === 'lastName' ||
+          field === 'email'
+        ) {
           aValue = a.attributes[field];
           bValue = b.attributes[field];
         }
@@ -106,25 +117,25 @@ export default [
     });
   }),
   http.post('/api/v1/users/', async (req) => {
-    const json = await req.request.json() as Record<string, any>;
+    const json = (await req.request.json()) as Record<string, any>;
 
     return HttpResponse.json({
       data: {
         id: json.data.lid,
         type: 'users' as const,
         attributes: json.data.attributes,
-      }
+      },
     });
   }),
   http.patch('/api/v1/users/{id}', async (req) => {
-    const json = await req.request.json() as Record<string, any>;
+    const json = (await req.request.json()) as Record<string, any>;
 
     return HttpResponse.json({
       data: {
         id: json.data.lid,
         type: 'users' as const,
         attributes: json.data.attributes,
-      }
+      },
     });
-  })
+  }),
 ];

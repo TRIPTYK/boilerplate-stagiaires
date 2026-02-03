@@ -1,6 +1,6 @@
 import EmberRouter from '@embroider/router';
 import config from '@apps/front/config/environment';
-import { forRouter as userLibRouter, authRoutes } from '@libs/users';
+import { forRouter as userLibRouter, authRoutes } from '@libs/users-front';
 
 export default class Router extends EmberRouter {
   location = config.locationType;
@@ -8,7 +8,7 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
-  this.route('dashboard', function() {
+  this.route('dashboard', function () {
     userLibRouter.call(this);
   });
   authRoutes.call(this);

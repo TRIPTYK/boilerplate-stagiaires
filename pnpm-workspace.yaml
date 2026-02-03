@@ -97,7 +97,7 @@ catalog:
   ember-truth-helpers: ^5.0.0
   ember-vitest: ^0.3.3
   eslint-plugin-import: ^2.31.0
-  fastify: ^5.2.1
+  fastify: ^5.7.2
   fastify-type-provider-zod: ^6.1.0
   fastify-zod: ^1.4.0
   flatpickr: ^4.6.13

@@ -9,5 +9,3 @@ export default class LoginRoute extends Route {
     this.session.prohibitAuthentication('application');
   }
 }
-
-

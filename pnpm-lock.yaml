@@ -280,7 +280,7 @@ catalogs:
       specifier: ^2.31.0
       version: 2.32.0
     fastify:
-      specifier: ^5.2.1
+      specifier: ^5.7.2
       version: 5.7.2
     fastify-type-provider-zod:
       specifier: ^6.1.0
@@ -672,7 +672,7 @@ importers:
       '@glint/template':
         specifier: 'catalog:'
         version: 1.7.4
-      '@libs/users':
+      '@libs/users-front':
         specifier: workspace:^
         version: link:../../@libs/users
       '@playwright/test':
@@ -843,6 +843,9 @@ importers:
       stylelint-config-standard:
         specifier: 'catalog:'
         version: 40.0.0(stylelint@17.1.0(typescript@5.9.3))
+      stylelint-config-tailwindcss:
+        specifier: ^1.0.1
+        version: 1.0.1(stylelint@17.1.0(typescript@5.9.3))(tailwindcss@4.1.18)
       tailwindcss:
         specifier: 'catalog:'
         version: 4.1.18
@@ -870,6 +873,9 @@ importers:
 
   '@libs/backend-shared':
     dependencies:
+      fastify:
+        specifier: 'catalog:'
+        version: 5.7.2
       zod:
         specifier: ^4.0.0
         version: 4.3.6
@@ -880,6 +886,12 @@ importers:
       '@typescript/native-preview':
         specifier: 'catalog:'
         version: 7.0.0-dev.20260202.1
+      oxfmt:
+        specifier: 'catalog:'
+        version: 0.28.0
+      oxlint:
+        specifier: 'catalog:'
+        version: 1.43.0(oxlint-tsgolint@0.11.4)
       tsdown:
         specifier: ^0.20.1
         version: 0.20.1(@typescript/native-preview@7.0.0-dev.20260202.1)(typescript@5.9.3)
@@ -9905,6 +9917,12 @@ packages:
     engines: {node: '>=20.19.0'}
     peerDependencies:
       stylelint: ^17.0.0
+
+  stylelint-config-tailwindcss@1.0.1:
+    resolution: {integrity: sha512-IeIMivgaB1kxPBgllMzBqyv0g61IwFxxZKo/fDDelfZ/JtPPlSBT04VuOCslk6PIaq5GQvdRnHOP1K3HpxSkeg==}
+    peerDependencies:
+      stylelint: '>=13.13.1'
+      tailwindcss: '>=2.2.16'
 
   stylelint@17.1.0:
     resolution: {integrity: sha512-+cUX1FxkkbLX5qJRAPapUv/+v+YU3pGbWu+pHVqTXpiY0mYh3Dxfxa0bLBtVtYgOC8hIWIyX2H/3Y3LWlAevDg==}
@@ -21320,6 +21338,11 @@ snapshots:
     dependencies:
       stylelint: 17.1.0(typescript@5.9.3)
       stylelint-config-recommended: 18.0.0(stylelint@17.1.0(typescript@5.9.3))
+
+  stylelint-config-tailwindcss@1.0.1(stylelint@17.1.0(typescript@5.9.3))(tailwindcss@4.1.18):
+    dependencies:
+      stylelint: 17.1.0(typescript@5.9.3)
+      tailwindcss: 4.1.18
 
   stylelint@17.1.0(typescript@5.9.3):
     dependencies:

@@ -6,11 +6,7 @@ import type UserService from '#src/services/user.ts';
 import type { UserChangeset } from '#src/changesets/user.ts';
 import { createUserValidationSchema } from '#src/components/forms/user-validation.ts';
 import type RouterService from '@ember/routing/router-service';
-import {
-  create,
-  fillable,
-  clickable,
-} from 'ember-cli-page-object';
+import { create, fillable, clickable } from 'ember-cli-page-object';
 import type FlashMessageService from 'ember-cli-flash/services/flash-messages';
 import { t, type IntlService } from 'ember-intl';
 
@@ -28,11 +24,15 @@ export default class UsersForm extends Component<UsersFormArgs> {
     return createUserValidationSchema(this.intl);
   }
 
-  onSubmit = async (data: z.infer<ReturnType<typeof createUserValidationSchema>>) => {
+  onSubmit = async (
+    data: z.infer<ReturnType<typeof createUserValidationSchema>>,
+  ) => {
     await this.user.save(data);
     await this.router.transitionTo('dashboard.users');
-    this.flashMessages.success(this.intl.t('users.forms.user.messages.saveSuccess'));
-  }
+    this.flashMessages.success(
+      this.intl.t('users.forms.user.messages.saveSuccess'),
+    );
+  };
 
   <template>
     <TpkForm
@@ -40,10 +40,20 @@ export default class UsersForm extends Component<UsersFormArgs> {
       @onSubmit={{this.onSubmit}}
       @validationSchema={{this.validationSchema}}
       data-test-users-form
-    as |F|>
-      <F.TpkInputPrefab @label={{t "users.forms.user.labels.firstName"}} @validationField="firstName" />
-      <F.TpkInputPrefab @label={{t "users.forms.user.labels.lastName"}} @validationField="lastName" />
-      <F.TpkEmailPrefab @label={{t "users.forms.user.labels.email"}} @validationField="email" />
+      as |F|
+    >
+      <F.TpkInputPrefab
+        @label={{t "users.forms.user.labels.firstName"}}
+        @validationField="firstName"
+      />
+      <F.TpkInputPrefab
+        @label={{t "users.forms.user.labels.lastName"}}
+        @validationField="lastName"
+      />
+      <F.TpkEmailPrefab
+        @label={{t "users.forms.user.labels.email"}}
+        @validationField="email"
+      />
       <button type="submit">{{t "users.forms.user.actions.submit"}}</button>
     </TpkForm>
   </template>
@@ -51,7 +61,9 @@ export default class UsersForm extends Component<UsersFormArgs> {
 
 export const pageObject = create({
   scope: '[data-test-users-form]',
-  firstName: fillable('[data-test-tpk-prefab-input-container="firstName"] input'),
+  firstName: fillable(
+    '[data-test-tpk-prefab-input-container="firstName"] input',
+  ),
   lastName: fillable('[data-test-tpk-prefab-input-container="lastName"] input'),
   email: fillable('[data-test-tpk-prefab-email-container="email"] input'),
   submit: clickable('button[type="submit"]'),

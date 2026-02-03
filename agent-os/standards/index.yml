@@ -7,6 +7,14 @@ backend:
     description: Environment variable validation using Zod schemas
   error-format:
     description: Consistent error response structure with code, message, status
+  json-api-serialization:
+    description: JSON:API response format for Ember frontend compatibility
+  jwt-authentication:
+    description: JWT Bearer tokens with access/refresh token pattern
+  password-hashing:
+    description: Argon2 password hashing utilities
+  route-schemas:
+    description: Inline Zod schema validation for request/response with colocation
 
 frontend:
   file-extensions:
@@ -17,12 +25,20 @@ frontend:
     description: Route template files colocated with route logic
 
 global:
+  auth-middleware:
+    description: Full-stack auth middleware for backend and frontend
+  feature-libraries:
+    description: Paired [feature]-front and [feature]-backend libraries
   folder-structure:
     description: Standard folder organization for frontend and backend
   import-alias:
     description: Use #src/ import alias instead of relative paths
+  monorepo-packages:
+    description: "@apps for deployables, @libs for shared packages"
 
 testing:
+  e2e-playwright:
+    description: Playwright E2E tests with role-based selectors
   msw-mocking:
     description: Type-safe API mocking with openapi-msw
   page-objects:

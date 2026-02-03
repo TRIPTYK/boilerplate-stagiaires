@@ -1,9 +1,10 @@
 /* Ember supports plain CSS out of the box. More info: https://cli.emberjs.com/release/advanced-use/stylesheets/ */
-@import "tailwindcss";
-@plugin "daisyui";
+@import 'tailwindcss';
 @import '@triptyk/ember-input/dist/app.css';
 @import '@triptyk/ember-ui/dist/app.css';
 @import '@triptyk/ember-input-validation/dist/app.css';
+
+@plugin "daisyui";
 
 /* Additional global styles can be added below */
 @source "../../node_modules/@triptyk/ember-ui";

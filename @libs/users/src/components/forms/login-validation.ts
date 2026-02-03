@@ -1,10 +1,14 @@
-import { email, object, string } from "zod";
+import { email, object, string } from 'zod';
 import type { IntlService } from 'ember-intl';
 
-export const createLoginValidationSchema = (intl: IntlService) => object({
-  email: email(intl.t('users.forms.login.validation.invalidEmail')),
-  password: string().min(8, intl.t('users.forms.login.validation.passwordTooShort')),
-});
+export const createLoginValidationSchema = (intl: IntlService) =>
+  object({
+    email: email(intl.t('users.forms.login.validation.invalidEmail')),
+    password: string().min(
+      8,
+      intl.t('users.forms.login.validation.passwordTooShort'),
+    ),
+  });
 
 // For backwards compatibility, export a default that can be used with intl
 const LoginValidationSchema = object({

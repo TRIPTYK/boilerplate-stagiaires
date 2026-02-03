@@ -3,7 +3,7 @@ import type Owner from '@ember/owner';
 import type { DSL } from '@ember/routing/lib/dsl';
 import { buildRegistry } from 'ember-strict-application-resolver/build-registry';
 import SessionService from 'ember-simple-auth/services/session';
-import Base from 'ember-simple-auth/session-stores/base'
+import Base from 'ember-simple-auth/session-stores/base';
 import LocalStorage from 'ember-simple-auth/session-stores/local-storage';
 import type CurrentUserService from './services/current-user';
 import type { Store } from '@warp-drive/core';
@@ -17,23 +17,27 @@ export function moduleRegistry() {
     ...import.meta.glob('./components/**/*.{js,ts}', { eager: true }),
     ...import.meta.glob('./services/**/*.{js,ts}', { eager: true }),
     './services/session': {
-      default: SessionService
+      default: SessionService,
     },
     './session-stores/base': {
-      default: Base
+      default: Base,
     },
     './services/intl': {
-      default: IntlService
+      default: IntlService,
     },
     './session-stores/local-storage': {
-      default: LocalStorage
-    }
+      default: LocalStorage,
+    },
   })();
 }
 
 export async function initialize(owner: Owner) {
-  const sessionService = owner.lookup('service:session') as SessionService | undefined;
-  const currentUserService = owner.lookup('service:current-user') as CurrentUserService | undefined;
+  const sessionService = owner.lookup('service:session') as
+    | SessionService
+    | undefined;
+  const currentUserService = owner.lookup('service:current-user') as
+    | CurrentUserService
+    | undefined;
   const storeService = owner.lookup('service:store') as Store | undefined;
   const intlService = owner.lookup('service:intl') as IntlService | undefined;
   assert('Session service must be available', sessionService);
@@ -45,7 +49,7 @@ export async function initialize(owner: Owner) {
 }
 
 export function forRouter(this: DSL) {
-  this.route('users', function() {
+  this.route('users', function () {
     this.route('create');
     this.route('edit', { path: '/:user_id/edit' });
   });

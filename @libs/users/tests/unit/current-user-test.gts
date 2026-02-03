@@ -4,6 +4,7 @@ import { initializeTestApp, TestApp } from '../app';
 import type CurrentUserService from '#src/services/current-user.ts';
 
 describe('Service | CurrentUser | Unit', () => {
+  // eslint-disable-next-line no-empty-pattern
   test.scoped({ app: ({}, use) => use(TestApp) });
 
   test('currentUser getter throws error when no user is set', async ({
@@ -11,7 +12,7 @@ describe('Service | CurrentUser | Unit', () => {
   }) => {
     await initializeTestApp(context.owner, 'en-us');
     const currentUserService = context.owner.lookup(
-      'service:current-user'
+      'service:current-user',
     ) as CurrentUserService;
     expect(() => currentUserService.currentUser).toThrow('No current user set');
   });
@@ -21,7 +22,7 @@ describe('Service | CurrentUser | Unit', () => {
   }) => {
     await initializeTestApp(context.owner, 'en-us');
     const currentUserService = context.owner.lookup(
-      'service:current-user'
+      'service:current-user',
     ) as CurrentUserService;
 
     // Set a user manually
@@ -45,11 +46,11 @@ describe('Service | CurrentUser | Unit', () => {
   }) => {
     await initializeTestApp(context.owner, 'en-us');
     const currentUserService = context.owner.lookup(
-      'service:current-user'
+      'service:current-user',
     ) as CurrentUserService;
 
     // Set a user first
-    currentUserService.user ={
+    currentUserService.user = {
       id: '123',
       firstName: 'Jane',
       lastName: 'Smith',
@@ -57,7 +58,11 @@ describe('Service | CurrentUser | Unit', () => {
     } as never;
 
     // Mock session as not authenticated
-    vi.spyOn(currentUserService.session, 'isAuthenticated', 'get').mockReturnValue(false);
+    vi.spyOn(
+      currentUserService.session,
+      'isAuthenticated',
+      'get',
+    ).mockReturnValue(false);
 
     await currentUserService.load();
 
@@ -69,7 +74,7 @@ describe('Service | CurrentUser | Unit', () => {
   }) => {
     await initializeTestApp(context.owner, 'en-us');
     const currentUserService = context.owner.lookup(
-      'service:current-user'
+      'service:current-user',
     ) as CurrentUserService;
 
     const mockUser = {
@@ -81,7 +86,11 @@ describe('Service | CurrentUser | Unit', () => {
     };
 
     // Mock session as authenticated
-    vi.spyOn(currentUserService.session, 'isAuthenticated', 'get').mockReturnValue(true);
+    vi.spyOn(
+      currentUserService.session,
+      'isAuthenticated',
+      'get',
+    ).mockReturnValue(true);
 
     // Mock store request to return our mock user
     vi.spyOn(currentUserService.store, 'request').mockResolvedValue({
@@ -99,7 +108,7 @@ describe('Service | CurrentUser | Unit', () => {
   }) => {
     await initializeTestApp(context.owner, 'en-us');
     const currentUserService = context.owner.lookup(
-      'service:current-user'
+      'service:current-user',
     ) as CurrentUserService;
 
     const mockUser = {
@@ -111,7 +120,11 @@ describe('Service | CurrentUser | Unit', () => {
     };
 
     // Mock session as authenticated
-    vi.spyOn(currentUserService.session, 'isAuthenticated', 'get').mockReturnValue(true);
+    vi.spyOn(
+      currentUserService.session,
+      'isAuthenticated',
+      'get',
+    ).mockReturnValue(true);
 
     // Mock store request to return our mock user
     vi.spyOn(currentUserService.store, 'request').mockResolvedValue({

@@ -1,4 +1,4 @@
-const colors = require('tailwindcss/colors')
+const colors = require('tailwindcss/colors');
 
 module.exports = {
   theme: {
@@ -7,7 +7,7 @@ module.exports = {
       blue: colors.lightBlue,
       red: colors.rose,
       pink: colors.fuchsia,
-      error: colors.red
+      error: colors.red,
     },
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],
@@ -15,18 +15,18 @@ module.exports = {
     },
     extend: {
       spacing: {
-        '128': '32rem',
-        '144': '36rem',
+        128: '32rem',
+        144: '36rem',
       },
       borderRadius: {
         '4xl': '2rem',
-      }
-    }
+      },
+    },
   },
   variants: {
     extend: {
       borderColor: ['focus-visible'],
       opacity: ['disabled'],
-    }
-  }
-}
+    },
+  },
+};

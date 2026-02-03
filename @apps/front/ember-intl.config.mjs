@@ -3,6 +3,6 @@ export default {
   buildOptions: {
     fallbackLocale: 'en-us',
     inputPath: 'translations',
-    wrapTranslationsWithNamespace: true
+    wrapTranslationsWithNamespace: true,
   },
 };

@@ -1,6 +1,4 @@
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
-import { ImmerChangeset } from 'ember-immer-changeset';
 import { service } from '@ember/service';
 import type SessionService from 'ember-simple-auth/services/session';
 import { clickable, create, fillable } from 'ember-cli-page-object';
@@ -20,9 +18,11 @@ export default class LoginForm extends Component {
     return createLoginValidationSchema(this.intl);
   }
 
-  onSubmit = async (data: z.infer<ReturnType<typeof createLoginValidationSchema>>) => {
+  onSubmit = async (
+    data: z.infer<ReturnType<typeof createLoginValidationSchema>>,
+  ) => {
     await this.session.authenticate('authenticator:jwt', data);
-  }
+  };
 
   <template>
     <div class="login-form-container" data-test-login-form>
@@ -38,7 +38,8 @@ export default class LoginForm extends Component {
 export const pageObject = create({
   scope: '[data-test-login-form]',
   email: fillable('[data-test-tpk-prefab-email-container="email"] input'),
-  password: fillable('[data-test-tpk-prefab-password-container="password"] input'),
+  password: fillable(
+    '[data-test-tpk-prefab-password-container="password"] input',
+  ),
   submit: clickable('button[type="submit"]'),
 });
-

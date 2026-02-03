@@ -21,8 +21,8 @@ module.exports = async function (defaults) {
   });
 
   setConfig(app, __dirname, {
-      compatWith: '6.0.0',
-      deprecations: {},
+    compatWith: '6.0.0',
+    deprecations: {},
   });
 
   return compatBuild(app, buildOnce);

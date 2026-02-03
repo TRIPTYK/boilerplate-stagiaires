@@ -7,7 +7,11 @@
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest watch",
-    "build": "tsdown"
+    "build": "tsdown",
+    "lint": "oxlint src",
+    "lint:fix": "oxlint src --fix",
+    "lint:format": "oxfmt check src",
+    "format": "oxfmt fix src"
   },
   "type": "module",
   "keywords": [],
@@ -17,11 +21,14 @@
     "extends": "../../package.json"
   },
   "dependencies": {
+    "fastify": "catalog:",
     "zod": "^4.3.6"
   },
   "devDependencies": {
     "@libs/repo-utils": "workspace:^",
     "@typescript/native-preview": "catalog:",
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:",
     "tsdown": "^0.20.1",
     "vite": "^7.3.1",
     "vitest": "^4.0.18"

@@ -3,10 +3,10 @@ import { wrap, type EntityRepository } from "@mikro-orm/core";
 import { object, string } from "zod";
 import {
   jsonApiSerializeSingleUserDocument,
-  makeSingleJsonApiTopDocument,
   SerializedUserSchema,
 } from "#src/serializers/user.serializer.js";
 import type { UserEntityType } from "#src/entities/user.entity.js";
+import { makeSingleJsonApiTopDocument } from "@libs/backend-shared";
 
 export class UpdateRoute implements Route {
   public constructor(private userRepository: EntityRepository<UserEntityType>) {}

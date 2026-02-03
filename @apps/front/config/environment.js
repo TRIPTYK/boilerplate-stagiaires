@@ -25,7 +25,7 @@ module.exports = function (environment) {
       serverTokenEndpoint: 'api/v1/auth/login',
       tokenPropertyName: 'data.accessToken',
       refreshTokenPropertyName: 'data.refreshToken',
-      headers: {}
+      headers: {},
     };
   }
 

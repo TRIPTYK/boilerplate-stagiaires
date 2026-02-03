@@ -4,11 +4,11 @@ import type { EntityRepository } from "@mikro-orm/core";
 import { randomUUID } from "crypto";
 import {
   jsonApiSerializeSingleUserDocument,
-  makeSingleJsonApiTopDocument,
   SerializedUserSchema,
 } from "#src/serializers/user.serializer.js";
 import { hash } from "argon2";
 import { email, object, string } from "zod";
+import { makeSingleJsonApiTopDocument } from "@libs/backend-shared";
 
 export class CreateRoute implements Route {
   public constructor(private userRepository: EntityRepository<UserEntityType>) {}

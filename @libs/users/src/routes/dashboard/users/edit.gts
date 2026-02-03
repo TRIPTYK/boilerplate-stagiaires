@@ -18,14 +18,13 @@ export default class UsersEditRoute extends Route {
       findRecord<User>('users', user_id, {
         include: [],
       }),
-    )
+    );
 
     assert('User must not be null', user.content.data !== null);
     const data = user.content.data;
 
     return {
-      user: data
+      user: data,
     };
   }
 }
-

@@ -1,8 +1,8 @@
-import { assert, describe } from "vitest";
-import { applicationTest } from "ember-vitest";
-import { visit } from "@ember/test-helpers";
-import App from "@apps/front/app";
-import { vi } from "vitest";
+import { assert, describe } from 'vitest';
+import { applicationTest } from 'ember-vitest';
+import { visit } from '@ember/test-helpers';
+import App from '@apps/front/app';
+import { vi } from 'vitest';
 
 vi.mock('@embroider/config-meta-loader', () => {
   return {
@@ -29,11 +29,12 @@ vi.mock('@embroider/config-meta-loader', () => {
   };
 });
 
-describe("Home", () => {
+describe('Home', () => {
+  // eslint-disable-next-line no-empty-pattern
   applicationTest.scoped({ app: ({}, use) => use(App) });
 
-  applicationTest("can visit the home screen", async () => {
-    await visit("/login");
+  applicationTest('can visit the home screen', async () => {
+    await visit('/login');
     assert.ok(true);
   });
 });

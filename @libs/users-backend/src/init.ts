@@ -16,6 +16,7 @@ import { GetRoute } from "#src/routes/get.route.js";
 import { UpdateRoute } from "#src/routes/update.route.js";
 import { DeleteRoute } from "#src/routes/delete.route.js";
 import { UserEntity } from "./entities/user.entity.js";
+import type { ModuleInterface, Route } from "@libs/backend-shared";
 
 export type FastifyInstanceTypeForModule = FastifyInstance<
   RawServerDefault,
@@ -25,15 +26,7 @@ export type FastifyInstanceTypeForModule = FastifyInstance<
   ZodTypeProvider
 >;
 
-export interface Route {
-  routeDefinition(f: FastifyInstanceTypeForModule): void;
-}
-
-export interface ModuleInterface {
-  setupRoutes(fastify: FastifyInstanceTypeForModule): Promise<void>;
-}
-
-export class Module implements ModuleInterface {
+export class Module implements ModuleInterface<FastifyInstanceTypeForModule> {
   private constructor(private context: LibraryContext) {}
 
   public static init(context: LibraryContext): Module {
@@ -43,7 +36,7 @@ export class Module implements ModuleInterface {
   public async setupRoutes(fastify: FastifyInstanceTypeForModule): Promise<void> {
     const repository = this.context.em.getRepository(UserEntity);
 
-    const authRoutes: Route[] = [
+    const authRoutes: Route<FastifyInstanceTypeForModule>[] = [
       new LoginRoute(
         this.context.em.getRepository(UserEntity),
         this.context.configuration.jwtSecret,
@@ -75,7 +68,7 @@ export class Module implements ModuleInterface {
           }
         });
 
-        const userRoutes: Route[] = [
+        const userRoutes: Route<FastifyInstanceTypeForModule>[] = [
           new CreateRoute(repository),
           new ProfileRoute(),
           new ListRoute(this.context.em),

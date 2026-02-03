@@ -8,7 +8,9 @@
     "./configs/app/*": "./configs/app/*"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "lint": "echo \"No lint configured\" && exit 0",
+    "format": "echo \"No format configured\" && exit 0"
   },
   "keywords": [],
   "author": "",

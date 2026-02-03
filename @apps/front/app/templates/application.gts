@@ -6,7 +6,6 @@ import type FlashMessageService from 'ember-cli-flash/services/flash-messages';
 // eslint-disable-next-line
 import component from '@ember/component/template-only';
 
-
 interface ApplicationSignature {
   Args: {
     model: unknown;
@@ -23,10 +22,10 @@ class ApplicationTemplate extends Component<ApplicationSignature> {
     {{#each this.flashMessages.queue as |flashC|}}
       <FlashMessage @flash={{flashC}} as |component flash|>
         {{#if flash.componentName}}
-          {{!-- @glint-expect-error --}}
+          {{! @glint-expect-error }}
           {{component flash.componentName content=flash.content}}
         {{else}}
-          {{!-- @glint-expect-error --}}
+          {{! @glint-expect-error }}
           <h6>{{component.flashType}}</h6>
           <p>{{flash.message}}</p>
         {{/if}}
@@ -34,7 +33,7 @@ class ApplicationTemplate extends Component<ApplicationSignature> {
     {{/each}}
 
     {{outlet}}
-  </template>;
+  </template>
 }
 
 export default ApplicationTemplate;

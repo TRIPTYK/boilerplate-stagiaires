@@ -1,6 +1,6 @@
 {
   "extends": "@ember/app-tsconfig",
-  "include": ["app", "tests", "types", "e2e"],
+  "include": ["app", "tests", "types", "e2e", "playwright.config.ts"],
   "compilerOptions": {
     "allowJs": true,
     "paths": {
@@ -8,6 +8,12 @@
       "@apps/front/*": ["./app/*"],
       "*": ["./types/*"]
     },
-    "types": ["ember-source/types", "@embroider/core/virtual", "vite/client", "@ember-intl/vite/virtual"]
+    "types": [
+      "ember-source/types",
+      "@embroider/core/virtual",
+      "vite/client",
+      "@ember-intl/vite/virtual",
+      "node"
+    ]
   }
 }

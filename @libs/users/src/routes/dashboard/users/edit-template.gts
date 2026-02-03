@@ -1,8 +1,7 @@
-
-import { UserChangeset } from "#src/changesets/user.ts";
-import UsersForm from "#src/components/forms/user-form.gts";
-import Component from "@glimmer/component";
-import type { UsersEditRouteSignature } from "./edit.gts";
+import { UserChangeset } from '#src/changesets/user.ts';
+import UsersForm from '#src/components/forms/user-form.gts';
+import Component from '@glimmer/component';
+import type { UsersEditRouteSignature } from './edit.gts';
 
 export default class UsersEditRouteTemplate extends Component<UsersEditRouteSignature> {
   changeset = new UserChangeset({
@@ -11,7 +10,5 @@ export default class UsersEditRouteTemplate extends Component<UsersEditRouteSign
     email: this.args.model.user.email,
   });
 
-  <template>
-    <UsersForm @changeset={{this.changeset}} />
-  </template>
+  <template><UsersForm @changeset={{this.changeset}} /></template>
 }

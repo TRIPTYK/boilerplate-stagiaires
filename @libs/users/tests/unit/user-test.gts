@@ -28,6 +28,7 @@ const handlers = [
 ];
 
 describe('Service | User | Unit', () => {
+  // eslint-disable-next-line no-empty-pattern
   test.scoped({ app: ({}, use) => use(TestApp) });
 
   beforeAll(async () => {

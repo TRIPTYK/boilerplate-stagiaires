@@ -17,8 +17,13 @@
             "dependsOn": ["^build"]
         },
         "lint": {
-          
+            
         },
+        "lint:fix": {
+            
+        },
+        "format": {},
+        "lint:format": {},
         "test": {
             "dependsOn": ["^build"]
         }

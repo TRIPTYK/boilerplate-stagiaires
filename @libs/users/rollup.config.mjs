@@ -3,7 +3,10 @@ import { Addon } from '@embroider/addon-dev/rollup';
 import { fileURLToPath } from 'node:url';
 import { resolve, dirname } from 'node:path';
 import alias from '@rollup/plugin-alias';
-import { moveRouteTemplatesPlugin, fileNameMapper } from '@libs/repo-utils/configs/addon/mapper-plugin.mjs';
+import {
+  moveRouteTemplatesPlugin,
+  fileNameMapper,
+} from '@libs/repo-utils/configs/addon/mapper-plugin.mjs';
 
 const addon = new Addon({
   srcDir: 'src',
@@ -18,9 +21,7 @@ export default {
   output: addon.output(),
   plugins: [
     alias({
-      entries: [
-        { find: '#src', replacement: resolve(rootDirectory, 'src') },
-      ]
+      entries: [{ find: '#src', replacement: resolve(rootDirectory, 'src') }],
     }),
     // Move route template files to templates directory
     moveRouteTemplatesPlugin(),
@@ -31,24 +32,31 @@ export default {
     // up your addon's public API. Also make sure your package.json#exports
     // is aligned to the config here.
     // See https://github.com/embroider-build/embroider/blob/main/docs/v2-faq.md#how-can-i-define-the-public-exports-of-my-addon
-    addon.publicEntrypoints(['**/*.js', 'index.js', 'template-registry.js', '**/*.yaml']),
+    addon.publicEntrypoints([
+      '**/*.js',
+      'index.js',
+      'template-registry.js',
+      '**/*.yaml',
+    ]),
 
     // These are the modules that should get reexported into the traditional
     // "app" tree. Things in here should also be in publicEntrypoints above, but
     // not everything in publicEntrypoints necessarily needs to go here.
-    addon.appReexports([
-      'components/**/*-form.js',
-      'helpers/**/*.js',
-      'routes/**/*.js',
-      'modifiers/**/*.js',
-      'services/**/*.js',
-      'handlers/**/*.js',
-      'templates/**/*.js',
-      'schemas/**/*.js',
-    ], {
-      mapFilename: fileNameMapper,
-    }),
-
+    addon.appReexports(
+      [
+        'components/**/*-form.js',
+        'helpers/**/*.js',
+        'routes/**/*.js',
+        'modifiers/**/*.js',
+        'services/**/*.js',
+        'handlers/**/*.js',
+        'templates/**/*.js',
+        'schemas/**/*.js',
+      ],
+      {
+        mapFilename: fileNameMapper,
+      },
+    ),
 
     // Follow the V2 Addon rules about dependencies. Your code can import from
     // `dependencies` and `peerDependencies` as well as standard Ember-provided

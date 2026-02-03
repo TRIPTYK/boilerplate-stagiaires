@@ -1,5 +1,5 @@
-import { resumeTest } from "@ember/test-helpers";
-import { afterEach, beforeEach, vi } from "vitest";
+import { resumeTest } from '@ember/test-helpers';
+import { afterEach, beforeEach, vi } from 'vitest';
 
 const callback = (event: KeyboardEvent) => {
   if (event.ctrlKey && event.key === 'r') {

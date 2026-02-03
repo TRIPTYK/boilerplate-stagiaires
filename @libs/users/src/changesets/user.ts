@@ -1,4 +1,4 @@
-import ImmerChangeset from "ember-immer-changeset";
+import ImmerChangeset from 'ember-immer-changeset';
 
 export interface DraftUser {
   id?: string | null;
@@ -7,4 +7,4 @@ export interface DraftUser {
   email?: string;
 }
 
-export class UserChangeset  extends ImmerChangeset<DraftUser> {}
+export class UserChangeset extends ImmerChangeset<DraftUser> {}

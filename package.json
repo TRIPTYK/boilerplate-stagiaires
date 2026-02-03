@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "pnpm turbo run lint",
+    "lint:fix": "pnpm turbo run lint:fix",
+    "format": "pnpm turbo run format",
+    "lint:format": "pnpm turbo run lint:format"
   },
   "keywords": [],
   "author": "",

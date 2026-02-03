@@ -6,4 +6,3 @@ export type UsersCreateRouteSignature = {
 };
 
 export default class UsersCreateRoute extends Route {}
-

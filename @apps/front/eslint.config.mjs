@@ -66,12 +66,25 @@ export default ts.config(
     },
   },
   {
-    files: ['{app,tests}/*.{ts,gts}'],
+    files: ['{app,e2e,tests}/**/*.{ts,gts}'],
     languageOptions: {
       parser: ember.parser,
       parserOptions: parserOptions.esm.ts,
+      globals: {
+        ...globals.browser,
+      },
     },
     extends: [...ts.configs.recommendedTypeChecked, ember.configs.gts],
+  },
+  {
+    files: ['playwright.config.ts'],
+    languageOptions: {
+      parserOptions: parserOptions.esm.ts,
+      globals: {
+        ...globals.node,
+      },
+    },
+    extends: [...ts.configs.recommendedTypeChecked],
   },
   /**
    * CJS node files
