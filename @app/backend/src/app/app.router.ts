@@ -3,7 +3,11 @@ import type { FastifyInstanceType } from "./app.js";
 import type { ApplicationContext } from "./application.context.js";
 import { statusRoute } from "./status.route.js";
 
-export async function appRouter(fastify: FastifyInstanceType, context: ApplicationContext, modules: ModuleInterface[]) {
+export async function appRouter(
+  fastify: FastifyInstanceType,
+  context: ApplicationContext,
+  modules: ModuleInterface[],
+) {
   await fastify.register(
     async function (fastify) {
       await fastify.register(statusRoute);

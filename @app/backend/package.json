@@ -6,6 +6,7 @@
   "license": "ISC",
   "author": "",
   "type": "module",
+  "types": "src/api-types.ts",
   "main": "app.bootstrap.js",
   "scripts": {
     "start": "vite-node --env-file-if-exists=.env src/app.bootstrap.ts",

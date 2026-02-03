@@ -4,8 +4,6 @@ import {
   fastify as Fastify,
   type FastifyError,
   type FastifyInstance,
-  type FastifyReply,
-  type FastifyRequest,
   type RawReplyDefaultExpression,
   type RawRequestDefaultExpression,
   type RawServerDefault,
@@ -21,7 +19,7 @@ import packageJson from "../../package.json" with { type: "json" };
 import { appRouter } from "./app.router.js";
 import type { ApplicationContext } from "./application.context.js";
 import { logger } from "./logger.js";
-import { Module, type ModuleInterface } from '@libs/users-backend';
+import { Module, type ModuleInterface } from "@libs/users-backend";
 
 export type FastifyInstanceType = FastifyInstance<
   RawServerDefault,
@@ -150,30 +148,26 @@ export class App {
       configuration: {
         jwtSecret: context.configuration.JWT_SECRET,
         jwtRefreshSecret: context.configuration.JWT_REFRESH_SECRET,
-      }
+      },
     });
 
     await app.setupRoutes([UserModule]);
-
-
 
     return app;
   }
 
   private async setupRoutes(modules: ModuleInterface[]) {
-    this.fastify.setErrorHandler(
-      (error: FastifyError, request: FastifyRequest, reply: FastifyReply) => {
-        // eslint-disable-next-line no-console
-        console.error(error);
-        reply.send({
-          message: error.message,
-          code: error.code,
-          status: error.statusCode ?? 500,
-        });
-      },
-    );
+    this.fastify.setErrorHandler((error: FastifyError, request, reply) => {
+      // eslint-disable-next-line no-console
+      console.error(error);
+      reply.send({
+        message: error.message,
+        code: error.code,
+        status: error.statusCode ?? 500,
+      });
+    });
 
-    this.fastify.setNotFoundHandler((_request: FastifyRequest, reply: FastifyReply) => {
+    this.fastify.setNotFoundHandler((_request, reply) => {
       reply.send({
         message: "Not found",
         code: "NOT_FOUND",

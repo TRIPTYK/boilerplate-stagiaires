@@ -55,7 +55,8 @@
                     "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
                   },
                   "password": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 8
                   }
                 },
                 "required": [
@@ -99,6 +100,29 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "code"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
           }
         }
       }
@@ -111,32 +135,53 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "id": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string",
-                    "format": "email",
-                    "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
-                  },
-                  "firstName": {
-                    "type": "string",
-                    "minLength": 1
-                  },
-                  "lastName": {
-                    "type": "string",
-                    "minLength": 1
-                  },
-                  "password": {
-                    "type": "string",
-                    "minLength": 8
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "users"
+                        ]
+                      },
+                      "attributes": {
+                        "type": "object",
+                        "properties": {
+                          "email": {
+                            "type": "string",
+                            "format": "email",
+                            "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                          },
+                          "password": {
+                            "type": "string",
+                            "minLength": 8
+                          },
+                          "firstName": {
+                            "type": "string"
+                          },
+                          "lastName": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "email",
+                          "password",
+                          "firstName",
+                          "lastName"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "attributes"
+                    ]
                   }
                 },
                 "required": [
-                  "email",
-                  "firstName",
-                  "lastName",
-                  "password"
+                  "data"
                 ]
               }
             }
@@ -157,23 +202,39 @@
                         "id": {
                           "type": "string"
                         },
-                        "email": {
+                        "type": {
                           "type": "string",
-                          "format": "email",
-                          "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                          "enum": [
+                            "users"
+                          ]
                         },
-                        "firstName": {
-                          "type": "string"
-                        },
-                        "lastName": {
-                          "type": "string"
+                        "attributes": {
+                          "type": "object",
+                          "properties": {
+                            "email": {
+                              "type": "string",
+                              "format": "email",
+                              "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                            },
+                            "firstName": {
+                              "type": "string"
+                            },
+                            "lastName": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "email",
+                            "firstName",
+                            "lastName"
+                          ],
+                          "additionalProperties": false
                         }
                       },
                       "required": [
                         "id",
-                        "email",
-                        "firstName",
-                        "lastName"
+                        "type",
+                        "attributes"
                       ],
                       "additionalProperties": false
                     }
@@ -205,23 +266,39 @@
                           "id": {
                             "type": "string"
                           },
-                          "email": {
+                          "type": {
                             "type": "string",
-                            "format": "email",
-                            "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                            "enum": [
+                              "users"
+                            ]
                           },
-                          "firstName": {
-                            "type": "string"
-                          },
-                          "lastName": {
-                            "type": "string"
+                          "attributes": {
+                            "type": "object",
+                            "properties": {
+                              "email": {
+                                "type": "string",
+                                "format": "email",
+                                "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                              },
+                              "firstName": {
+                                "type": "string"
+                              },
+                              "lastName": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "email",
+                              "firstName",
+                              "lastName"
+                            ],
+                            "additionalProperties": false
                           }
                         },
                         "required": [
                           "id",
-                          "email",
-                          "firstName",
-                          "lastName"
+                          "type",
+                          "attributes"
                         ],
                         "additionalProperties": false
                       }
@@ -267,23 +344,39 @@
                         "id": {
                           "type": "string"
                         },
-                        "email": {
+                        "type": {
                           "type": "string",
-                          "format": "email",
-                          "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                          "enum": [
+                            "users"
+                          ]
                         },
-                        "firstName": {
-                          "type": "string"
-                        },
-                        "lastName": {
-                          "type": "string"
+                        "attributes": {
+                          "type": "object",
+                          "properties": {
+                            "email": {
+                              "type": "string",
+                              "format": "email",
+                              "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                            },
+                            "firstName": {
+                              "type": "string"
+                            },
+                            "lastName": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "email",
+                            "firstName",
+                            "lastName"
+                          ],
+                          "additionalProperties": false
                         }
                       },
                       "required": [
                         "id",
-                        "email",
-                        "firstName",
-                        "lastName"
+                        "type",
+                        "attributes"
                       ],
                       "additionalProperties": false
                     }
@@ -325,29 +418,68 @@
                         "id": {
                           "type": "string"
                         },
-                        "email": {
+                        "type": {
                           "type": "string",
-                          "format": "email",
-                          "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                          "enum": [
+                            "users"
+                          ]
                         },
-                        "firstName": {
-                          "type": "string"
-                        },
-                        "lastName": {
-                          "type": "string"
+                        "attributes": {
+                          "type": "object",
+                          "properties": {
+                            "email": {
+                              "type": "string",
+                              "format": "email",
+                              "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                            },
+                            "firstName": {
+                              "type": "string"
+                            },
+                            "lastName": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "email",
+                            "firstName",
+                            "lastName"
+                          ],
+                          "additionalProperties": false
                         }
                       },
                       "required": [
                         "id",
-                        "email",
-                        "firstName",
-                        "lastName"
+                        "type",
+                        "attributes"
                       ],
                       "additionalProperties": false
                     }
                   },
                   "required": [
                     "data"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "code"
                   ],
                   "additionalProperties": false
                 }
@@ -363,27 +495,54 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "email": {
-                    "type": "string",
-                    "format": "email",
-                    "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
-                  },
-                  "firstName": {
-                    "type": "string",
-                    "minLength": 1
-                  },
-                  "lastName": {
-                    "type": "string",
-                    "minLength": 1
-                  },
-                  "password": {
-                    "type": "string",
-                    "minLength": 8
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "users"
+                        ]
+                      },
+                      "attributes": {
+                        "type": "object",
+                        "properties": {
+                          "email": {
+                            "type": "string",
+                            "format": "email",
+                            "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                          },
+                          "firstName": {
+                            "type": "string"
+                          },
+                          "lastName": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "email",
+                          "firstName",
+                          "lastName"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type",
+                      "attributes"
+                    ]
                   }
-                }
+                },
+                "required": [
+                  "data"
+                ]
               }
             }
-          }
+          },
+          "required": true
         },
         "parameters": [
           {
@@ -409,29 +568,91 @@
                         "id": {
                           "type": "string"
                         },
-                        "email": {
+                        "type": {
                           "type": "string",
-                          "format": "email",
-                          "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                          "enum": [
+                            "users"
+                          ]
                         },
-                        "firstName": {
-                          "type": "string"
-                        },
-                        "lastName": {
-                          "type": "string"
+                        "attributes": {
+                          "type": "object",
+                          "properties": {
+                            "email": {
+                              "type": "string",
+                              "format": "email",
+                              "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                            },
+                            "firstName": {
+                              "type": "string"
+                            },
+                            "lastName": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "email",
+                            "firstName",
+                            "lastName"
+                          ],
+                          "additionalProperties": false
                         }
                       },
                       "required": [
                         "id",
-                        "email",
-                        "firstName",
-                        "lastName"
+                        "type",
+                        "attributes"
                       ],
                       "additionalProperties": false
                     }
                   },
                   "required": [
                     "data"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "code"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "code"
                   ],
                   "additionalProperties": false
                 }
@@ -452,8 +673,54 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Default Response"
+          },
+          "403": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "code"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "code"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
           }
         }
       }

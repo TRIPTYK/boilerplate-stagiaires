@@ -10,7 +10,7 @@ import { GetRoute } from "@lib/route/get.route.js";
 import { UpdateRoute } from "@lib/route/update.route.js";
 import { DeleteRoute } from "@lib/route/delete.route.js";
 import "@lib/types.js";
-import { UserSchema } from "./schemas/user.schema.js";
+import { UserEntity } from "./schemas/user.schema.js";
 
 export type FastifyInstanceTypeForModule = FastifyInstance<RawServerDefault, RawRequestDefaultExpression, RawReplyDefaultExpression, FastifyBaseLogger, ZodTypeProvider>;
 
@@ -35,11 +35,11 @@ export class Module implements ModuleInterface {
 
 
     public async setupRoutes(fastify: FastifyInstanceTypeForModule) {
-        const repository = this.context.em.getRepository(UserSchema);
+        const repository = this.context.em.getRepository(UserEntity);
 
         const authRoutes: Route[] = [
             new LoginRoute(
-                this.context.em.getRepository(UserSchema), 
+                this.context.em.getRepository(UserEntity), 
                 this.context.configuration.jwtSecret, 
                 this.context.configuration.jwtRefreshSecret
             ),

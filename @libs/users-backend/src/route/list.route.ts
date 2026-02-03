@@ -1,8 +1,8 @@
 import type { FastifyInstanceTypeForModule, Route } from "@lib/init.js";
-import { UserResponseSchema, UserSchema, type UserSchemaType } from "@lib/schemas/user.schema.js";
+import { UserEntity } from "@lib/schemas/user.schema.js";
 import type { EntityManager } from "@mikro-orm/core";
 import { array, number, object } from "zod";
-import type { FastifyRequest, FastifyReply } from "fastify";
+import { jsonApiSerializeManyUsers, SerializedUserSchema } from "@lib/serializer/user.serializer.js";
 
 export class ListRoute implements Route {
     public constructor(
@@ -14,7 +14,7 @@ export class ListRoute implements Route {
             schema: {
                 response: {
                     200: object({
-                        data: array(UserResponseSchema),
+                        data: array(SerializedUserSchema),
                         meta: object({
                             total: number(),
                         }),
@@ -22,7 +22,7 @@ export class ListRoute implements Route {
                 },
             },
 
-        }, async (request: FastifyRequest, reply: FastifyReply) => {
+        }, async (request, reply) => {
             const queryParams = request.query as Record<string, any>;
             const searchQuery = queryParams['filter[search]'] as string | undefined;
             const sortParam = queryParams['sort'] as string | undefined;
@@ -50,19 +50,11 @@ export class ListRoute implements Route {
                 }
             }
 
-            const userRepository = this.em.getRepository(UserSchema);
+            const userRepository = this.em.getRepository(UserEntity);
             const [users, total] = await userRepository.findAndCount(where, { orderBy });
 
-            // Map users to response format (exclude password)
-            const data = users.map((user: UserSchemaType) => ({
-                id: user.id,
-                email: user.email,
-                firstName: user.firstName,
-                lastName: user.lastName,
-            }));
-
             return reply.send({
-                data,
+                data: jsonApiSerializeManyUsers(users),
                 meta: {
                     total,
                 },

@@ -1,7 +1,7 @@
 import type { FastifyRequest, FastifyReply } from 'fastify';
 import type { EntityManager } from '@mikro-orm/core';
 import { verifyAccessToken } from '@lib/utils/jwt.utils.js';
-import { UserSchema } from '@lib/schemas/user.schema.js';
+import { UserEntity } from '@lib/schemas/user.schema.js';
 
 /**
  * JWT authentication middleware
@@ -9,7 +9,7 @@ import { UserSchema } from '@lib/schemas/user.schema.js';
  * Loads the user from the database and attaches to request.user
  */
 export function createJwtAuthMiddleware(em: EntityManager, jwtSecret: string) {
-  return async function jwtAuth(request: FastifyRequest, reply: FastifyReply) {
+  return async function jwtAuth(request, reply) {
     const authHeader = request.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -32,7 +32,7 @@ export function createJwtAuthMiddleware(em: EntityManager, jwtSecret: string) {
     }
 
     // Load user from database
-    const userRepository = em.getRepository(UserSchema);
+    const userRepository = em.getRepository(UserEntity);
     const user = await userRepository.findOne({ id: payload.userId });
 
     if (!user) {

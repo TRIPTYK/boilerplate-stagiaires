@@ -1,14 +1,13 @@
 import type { FastifyInstanceTypeForModule, Route } from "@lib/init.js";
-import { LoginSchema, type UserSchemaType } from "@lib/schemas/user.schema.js";
 import type { EntityRepository } from "@mikro-orm/core";
 import { verifyPassword } from "@lib/utils/auth.utils.js";
 import { generateTokens } from "@lib/utils/jwt.utils.js";
-import { object, string, type z } from "zod";
-import type { FastifyRequest, FastifyReply } from "fastify";
+import { email, object, string } from "zod";
+import type { UserEntityType } from "@lib/schemas/user.schema.js";
 
 export class LoginRoute implements Route {
     public constructor(
-        private userRepository: EntityRepository<UserSchemaType>,
+        private userRepository: EntityRepository<UserEntityType>,
         private jwtSecret: string,
         private jwtRefreshSecret: string
     ) {}
@@ -16,7 +15,10 @@ export class LoginRoute implements Route {
     public routeDefinition(f: FastifyInstanceTypeForModule) {
         return f.post('/login', {
             schema: {
-                body: LoginSchema,
+                body: object({
+                    email: email(),
+                    password: string().min(8),
+                }),
                 response: {
                     200: object({
                         data: object({
@@ -24,10 +26,14 @@ export class LoginRoute implements Route {
                             refreshToken: string(),
                         }),
                     }),
+                    401: object({
+                        message: string(),
+                        code: string()
+                    }),
                 },
             }
-        }, async (request: FastifyRequest, reply: FastifyReply) => {
-            const { email, password } = request.body as z.infer<typeof LoginSchema>;
+        }, async (request, reply) => {
+            const { email, password } = request.body;
 
             // Find user by email
             const user = await this.userRepository.findOne({ email });
@@ -35,8 +41,7 @@ export class LoginRoute implements Route {
             if (!user) {
                 return reply.code(401).send({
                     message: 'Invalid email or password',
-                    code: 'INVALID_CREDENTIALS',
-                    status: 401,
+                    code: 'INVALID_CREDENTIALS'
                 });
             }
 
@@ -46,8 +51,7 @@ export class LoginRoute implements Route {
             if (!isValidPassword) {
                 return reply.code(401).send({
                     message: 'Invalid email or password',
-                    code: 'INVALID_CREDENTIALS',
-                    status: 401,
+                    code: 'INVALID_CREDENTIALS'
                 });
             }
 

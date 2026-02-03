@@ -1,12 +1,11 @@
 import type { FastifyInstanceTypeForModule, Route } from "@lib/init.js";
-import type { UserSchemaType } from "@lib/schemas/user.schema.js";
 import type { EntityRepository } from "@mikro-orm/core";
-import { object, string } from "zod";
-import type { FastifyRequest, FastifyReply } from "fastify";
+import { literal, object, string } from "zod";
+import type { UserEntityType } from "@lib/schemas/user.schema.js";
 
 export class DeleteRoute implements Route {
     public constructor(
-        private userRepository: EntityRepository<UserSchemaType>
+        private userRepository: EntityRepository<UserEntityType>
     ) {}
 
     public routeDefinition(f: FastifyInstanceTypeForModule) {
@@ -15,8 +14,19 @@ export class DeleteRoute implements Route {
                 params: object({
                     id: string(),
                 }),
+                response: {
+                    403: object({
+                        message: string(),
+                        code: string()
+                    }),
+                    404: object({
+                        message: string(),
+                        code: string()
+                    }),
+                    204: literal(null),
+                }
             },
-        }, async (request: FastifyRequest, reply: FastifyReply) => {
+        }, async (request, reply) => {
             const { id } = request.params as { id: string };
             const currentUser = request.user!;
 
@@ -24,8 +34,7 @@ export class DeleteRoute implements Route {
             if (currentUser.id !== id) {
                 return reply.code(403).send({
                     message: 'You can only delete your own profile',
-                    code: 'FORBIDDEN',
-                    status: 403,
+                    code: 'FORBIDDEN'
                 });
             }
 
@@ -34,14 +43,13 @@ export class DeleteRoute implements Route {
             if (!user) {
                 return reply.code(404).send({
                     message: `User with id ${id} not found`,
-                    code: 'USER_NOT_FOUND',
-                    status: 404,
+                    code: 'USER_NOT_FOUND'
                 });
             }
 
             await this.userRepository.getEntityManager().remove(user).flush();
 
-            return reply.code(204).send();
+            return reply.code(204).send(null);
         });
     }
 }

@@ -14,6 +14,6 @@ export async function createApplicationContext(configuration: AppConfiguration) 
   return {
     configuration,
     logger: logger({ PRODUCTION_ENV: configuration.PRODUCTION_ENV }),
-    orm: await createDatabaseConnection(configuration)
+    orm: await createDatabaseConnection(configuration),
   } satisfies ApplicationContext;
 }

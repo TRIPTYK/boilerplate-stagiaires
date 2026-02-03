@@ -1,7 +1,6 @@
 import type { FastifyInstanceTypeForModule, Route } from "@lib/init.js";
-import { UserResponseSchema } from "@lib/schemas/user.schema.js";
 import { object } from "zod";
-import type { FastifyRequest, FastifyReply } from "fastify";
+import { jsonApiSerializeSingleUserResponse, SerializedUserSchema } from "@lib/serializer/user.serializer.js";
 
 export class ProfileRoute implements Route {
     public constructor() {}
@@ -11,21 +10,14 @@ export class ProfileRoute implements Route {
             schema: {
                 response: {
                     200: object({
-                        data: UserResponseSchema,
+                        data: SerializedUserSchema,
                     }),
                 },
             },
-        }, async (request: FastifyRequest, reply: FastifyReply) => {
+        }, async (request, reply) => {
             const user = request.user!;
 
-            return reply.send({
-                data: {
-                    id: user.id,
-                    email: user.email,
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                },
-            });
+            return reply.send(jsonApiSerializeSingleUserResponse(user));
         });
     }
 }

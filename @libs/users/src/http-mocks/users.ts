@@ -1,5 +1,5 @@
 import { HttpResponse } from 'msw';
-import type { paths } from 'backend-app';
+import type { paths } from '@app/backend';
 import { createOpenApiHttp } from "openapi-msw";
 
 const mockUsers = [
@@ -35,12 +35,12 @@ const mockUsers = [
 const http = createOpenApiHttp<paths>();
 
 export default [
-  http.untyped.get('/api/v1/users/profile', () => {
+  http.get('/api/v1/users/profile', () => {
     return HttpResponse.json({
-      data: mockUsers[0],
+      data: mockUsers[0]!,
     });
   }),
-  http.untyped.get('/api/v1/users/:id', (req) => {
+  http.get('/api/v1/users/{id}', (req) => {
     const { id } = req.params;
     const user = mockUsers.find((user) => user.id === id);
     if (user) {
@@ -50,13 +50,8 @@ export default [
     } else {
       return HttpResponse.json(
         {
-          errors: [
-            {
-              status: '404',
-              title: 'Not Found',
-              detail: `User with id ${id} not found`,
-            },
-          ],
+          message: 'Not Found',
+          code: 'USER_NOT_FOUND'
         },
         { status: 404 }
       );
@@ -110,7 +105,7 @@ export default [
       },
     });
   }),
-  http.untyped.post('/api/v1/users', async (req) => {
+  http.post('/api/v1/users/', async (req) => {
     const json = await req.request.json() as Record<string, any>;
 
     return HttpResponse.json({
@@ -121,7 +116,7 @@ export default [
       }
     });
   }),
-  http.untyped.patch('/api/v1/users', async (req) => {
+  http.patch('/api/v1/users/{id}', async (req) => {
     const json = await req.request.json() as Record<string, any>;
 
     return HttpResponse.json({

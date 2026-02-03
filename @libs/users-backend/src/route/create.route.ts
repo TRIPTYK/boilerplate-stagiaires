@@ -1,39 +1,46 @@
 import type { FastifyInstanceTypeForModule, Route } from "@lib/init.js";
-import { UserCreateSchema, UserResponseSchema, type UserSchemaType } from "@lib/schemas/user.schema.js";
+import { type UserEntityType } from "@lib/schemas/user.schema.js";
 import type { EntityRepository } from "@mikro-orm/core";
-import { hashPassword } from "@lib/utils/auth.utils.js";
-import type { FastifyRequest, FastifyReply } from "fastify";
-import { object, type z } from "zod";
+import { object, z } from "zod";
 import { randomUUID } from "crypto";
+import { makeSingleJsonApiTopDocument, SerializedUserSchema } from "@lib/serializer/user.serializer.js";
+import { hash } from "argon2";
 
 export class CreateRoute implements Route {
     public constructor(
-        private userRepository: EntityRepository<UserSchemaType>
+        private userRepository: EntityRepository<UserEntityType>
     ) {}
 
     public routeDefinition(f: FastifyInstanceTypeForModule) {
         return f.post('/', {
             schema: {
-                body: UserCreateSchema,
+                body: object({
+                    data: object({
+                        id: z.string().optional(),
+                        type: z.literal('users'),
+                        attributes: object({
+                            email: z.email(),
+                            password: z.string().min(8),
+                            firstName: z.string(),                            lastName: z.string(),
+                        }),
+                    })
+                }),
                 response: {
-                    200: object({
-                        data: UserResponseSchema,
-                    }),
+                    200: makeSingleJsonApiTopDocument(SerializedUserSchema)
                 },
             },
 
-        }, async (request: FastifyRequest, reply: FastifyReply) => {
-            const body = request.body as z.infer<typeof UserCreateSchema>;
+        }, async (request, reply) => {
+            const body = request.body.data.attributes;
 
-            // Hash password
-            const hashedPassword = await hashPassword(body.password);
+            const password = await hash(body.password);
 
             const user = this.userRepository.create({
-                id: body.id || randomUUID(),
+                id: request.body.data.id || randomUUID(),
                 email: body.email,
                 firstName: body.firstName,
                 lastName: body.lastName,
-                password: hashedPassword,
+                password,
             });
 
             await this.userRepository.getEntityManager().flush();
@@ -42,9 +49,12 @@ export class CreateRoute implements Route {
             return reply.send({
                 data: {
                     id: user.id,
-                    email: user.email,
-                    firstName: user.firstName,
-                    lastName: user.lastName,
+                    type: 'users' as const,
+                    attributes: {
+                        email: user.email,
+                        firstName: user.firstName,
+                        lastName: user.lastName,
+                    }
                 },
             });
         });

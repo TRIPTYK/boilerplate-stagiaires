@@ -1,13 +1,12 @@
 import type { FastifyInstanceTypeForModule, Route } from "@lib/init.js";
-import { UserUpdateSchema, UserResponseSchema, type UserSchemaType } from "@lib/schemas/user.schema.js";
-import type { EntityRepository } from "@mikro-orm/core";
-import { hashPassword } from "@lib/utils/auth.utils.js";
-import { object, string, type z } from "zod";
-import type { FastifyRequest, FastifyReply } from "fastify";
+import { wrap, type EntityRepository } from "@mikro-orm/core";
+import { object, string } from "zod";
+import { jsonApiSerializeSingleUserResponse, makeSingleJsonApiTopDocument, SerializedUserSchema } from "@lib/serializer/user.serializer.js";
+import type { UserEntityType } from "@lib/schemas/user.schema.js";
 
 export class UpdateRoute implements Route {
     public constructor(
-        private userRepository: EntityRepository<UserSchemaType>
+        private userRepository: EntityRepository<UserEntityType>
     ) {}
 
     public routeDefinition(f: FastifyInstanceTypeForModule) {
@@ -16,17 +15,23 @@ export class UpdateRoute implements Route {
                 params: object({
                     id: string(),
                 }),
-                body: UserUpdateSchema,
+                body: makeSingleJsonApiTopDocument(SerializedUserSchema),
                 response: {
-                    200: object({
-                        data: UserResponseSchema,
+                    200: makeSingleJsonApiTopDocument(SerializedUserSchema),
+                    403: object({
+                        message: string(),
+                        code: string()
+                    }),
+                    404: object({
+                        message: string(),
+                        code: string()
                     }),
                 },
             },
 
-        }, async (request: FastifyRequest, reply: FastifyReply) => {
+        }, async (request, reply) => {
             const { id } = request.params as { id: string };
-            const body = request.body as z.infer<typeof UserUpdateSchema>;
+            const body = request.body;
             const currentUser = request.user!;
 
             // Authorization: users can only update themselves
@@ -34,7 +39,6 @@ export class UpdateRoute implements Route {
                 return reply.code(403).send({
                     message: 'You can only update your own profile',
                     code: 'FORBIDDEN',
-                    status: 403,
                 });
             }
 
@@ -43,35 +47,15 @@ export class UpdateRoute implements Route {
             if (!user) {
                 return reply.code(404).send({
                     message: `User with id ${id} not found`,
-                    code: 'USER_NOT_FOUND',
-                    status: 404,
+                    code: 'USER_NOT_FOUND'
                 });
             }
 
-            // Update fields if provided
-            if (body.email !== undefined) {
-                user.email = body.email;
-            }
-            if (body.firstName !== undefined) {
-                user.firstName = body.firstName;
-            }
-            if (body.lastName !== undefined) {
-                user.lastName = body.lastName;
-            }
-            if (body.password !== undefined) {
-                user.password = await hashPassword(body.password);
-            }
+            wrap(user).assign(body.data.attributes);
 
             await this.userRepository.getEntityManager().flush();
 
-            return reply.send({
-                data: {
-                    id: user.id,
-                    email: user.email,
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                },
-            });
+            return reply.send(jsonApiSerializeSingleUserResponse(user));
         });
     }
 }

@@ -1,12 +1,12 @@
 import type { FastifyInstanceTypeForModule, Route } from "@lib/init.js";
-import { UserResponseSchema, type UserSchemaType } from "@lib/schemas/user.schema.js";
 import type { EntityRepository } from "@mikro-orm/core";
 import { object, string } from "zod";
-import type { FastifyRequest, FastifyReply } from "fastify";
+import { jsonApiSerializeSingleUserResponse, jsonApiSerializeUser, SerializedUserSchema } from "@lib/serializer/user.serializer.js";
+import type { UserEntityType } from "@lib/schemas/user.schema.js";
 
 export class GetRoute implements Route {
     public constructor(
-        private userRepository: EntityRepository<UserSchemaType>
+        private userRepository: EntityRepository<UserEntityType>
     ) {}
 
     public routeDefinition(f: FastifyInstanceTypeForModule) {
@@ -17,12 +17,16 @@ export class GetRoute implements Route {
                 }),
                 response: {
                     200: object({
-                        data: UserResponseSchema,
+                        data: SerializedUserSchema,
+                    }),
+                    404: object({
+                        message: string(),
+                        code: string()
                     }),
                 },
             },
 
-        }, async (request: FastifyRequest, reply: FastifyReply) => {
+        }, async (request, reply) => {
             const { id } = request.params as { id: string };
 
             const user = await this.userRepository.findOne({ id });
@@ -30,19 +34,11 @@ export class GetRoute implements Route {
             if (!user) {
                 return reply.code(404).send({
                     message: `User with id ${id} not found`,
-                    code: 'USER_NOT_FOUND',
-                    status: 404,
+                    code: 'USER_NOT_FOUND'
                 });
             }
 
-            return reply.send({
-                data: {
-                    id: user.id,
-                    email: user.email,
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                },
-            });
+            return reply.send(jsonApiSerializeSingleUserResponse(user));
         });
     }
 }

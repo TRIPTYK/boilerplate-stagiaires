@@ -81,6 +81,18 @@ export interface paths {
                         };
                     };
                 };
+                /** @description Default Response */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            message: string;
+                            code: string;
+                        };
+                    };
+                };
             };
         };
         delete?: never;
@@ -114,10 +126,14 @@ export interface paths {
                         "application/json": {
                             data: {
                                 id: string;
-                                /** Format: email */
-                                email: string;
-                                firstName: string;
-                                lastName: string;
+                                /** @enum {string} */
+                                type: "users";
+                                attributes: {
+                                    /** Format: email */
+                                    email: string;
+                                    firstName: string;
+                                    lastName: string;
+                                };
                             }[];
                             meta: {
                                 total: number;
@@ -138,12 +154,18 @@ export interface paths {
             requestBody: {
                 content: {
                     "application/json": {
-                        id?: string;
-                        /** Format: email */
-                        email: string;
-                        firstName: string;
-                        lastName: string;
-                        password: string;
+                        data: {
+                            id?: string;
+                            /** @enum {string} */
+                            type: "users";
+                            attributes: {
+                                /** Format: email */
+                                email: string;
+                                password: string;
+                                firstName: string;
+                                lastName: string;
+                            };
+                        };
                     };
                 };
             };
@@ -157,10 +179,14 @@ export interface paths {
                         "application/json": {
                             data: {
                                 id: string;
-                                /** Format: email */
-                                email: string;
-                                firstName: string;
-                                lastName: string;
+                                /** @enum {string} */
+                                type: "users";
+                                attributes: {
+                                    /** Format: email */
+                                    email: string;
+                                    firstName: string;
+                                    lastName: string;
+                                };
                             };
                         };
                     };
@@ -198,10 +224,14 @@ export interface paths {
                         "application/json": {
                             data: {
                                 id: string;
-                                /** Format: email */
-                                email: string;
-                                firstName: string;
-                                lastName: string;
+                                /** @enum {string} */
+                                type: "users";
+                                attributes: {
+                                    /** Format: email */
+                                    email: string;
+                                    firstName: string;
+                                    lastName: string;
+                                };
                             };
                         };
                     };
@@ -243,11 +273,27 @@ export interface paths {
                         "application/json": {
                             data: {
                                 id: string;
-                                /** Format: email */
-                                email: string;
-                                firstName: string;
-                                lastName: string;
+                                /** @enum {string} */
+                                type: "users";
+                                attributes: {
+                                    /** Format: email */
+                                    email: string;
+                                    firstName: string;
+                                    lastName: string;
+                                };
                             };
+                        };
+                    };
+                };
+                /** @description Default Response */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            message: string;
+                            code: string;
                         };
                     };
                 };
@@ -267,11 +313,35 @@ export interface paths {
             requestBody?: never;
             responses: {
                 /** @description Default Response */
-                200: {
+                204: {
                     headers: {
                         [name: string]: unknown;
                     };
                     content?: never;
+                };
+                /** @description Default Response */
+                403: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            message: string;
+                            code: string;
+                        };
+                    };
+                };
+                /** @description Default Response */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            message: string;
+                            code: string;
+                        };
+                    };
                 };
             };
         };
@@ -286,14 +356,20 @@ export interface paths {
                 };
                 cookie?: never;
             };
-            requestBody?: {
+            requestBody: {
                 content: {
                     "application/json": {
-                        /** Format: email */
-                        email?: string;
-                        firstName?: string;
-                        lastName?: string;
-                        password?: string;
+                        data: {
+                            id: string;
+                            /** @enum {string} */
+                            type: "users";
+                            attributes: {
+                                /** Format: email */
+                                email: string;
+                                firstName: string;
+                                lastName: string;
+                            };
+                        };
                     };
                 };
             };
@@ -307,11 +383,39 @@ export interface paths {
                         "application/json": {
                             data: {
                                 id: string;
-                                /** Format: email */
-                                email: string;
-                                firstName: string;
-                                lastName: string;
+                                /** @enum {string} */
+                                type: "users";
+                                attributes: {
+                                    /** Format: email */
+                                    email: string;
+                                    firstName: string;
+                                    lastName: string;
+                                };
                             };
+                        };
+                    };
+                };
+                /** @description Default Response */
+                403: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            message: string;
+                            code: string;
+                        };
+                    };
+                };
+                /** @description Default Response */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            message: string;
+                            code: string;
                         };
                     };
                 };
