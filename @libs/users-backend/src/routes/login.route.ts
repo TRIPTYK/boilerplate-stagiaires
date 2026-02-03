@@ -1,9 +1,9 @@
-import type { FastifyInstanceTypeForModule, Route } from "@lib/init.js";
+import type { FastifyInstanceTypeForModule, Route } from "#src/init.js";
 import type { EntityRepository } from "@mikro-orm/core";
-import { verifyPassword } from "@lib/utils/auth.utils.js";
-import { generateTokens } from "@lib/utils/jwt.utils.js";
+import { verifyPassword } from "#src/utils/auth.utils.js";
+import { generateTokens } from "#src/utils/jwt.utils.js";
 import { email, object, string } from "zod";
-import type { UserEntityType } from "@lib/entities/user.entity.js";
+import type { UserEntityType } from "#src/entities/user.entity.js";
 
 export class LoginRoute implements Route {
   public constructor(

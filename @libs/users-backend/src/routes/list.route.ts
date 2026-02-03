@@ -1,11 +1,11 @@
-import type { FastifyInstanceTypeForModule, Route } from "@lib/init.js";
-import { UserEntity } from "@lib/entities/user.entity.js";
+import type { FastifyInstanceTypeForModule, Route } from "#src/init.js";
+import { UserEntity } from "#src/entities/user.entity.js";
 import type { EntityManager } from "@mikro-orm/core";
 import { array, number, object } from "zod";
 import {
   jsonApiSerializeManyUsers,
   SerializedUserSchema,
-} from "@lib/serializers/user.serializer.js";
+} from "#src/serializers/user.serializer.js";
 
 export class ListRoute implements Route {
   public constructor(private em: EntityManager) {}

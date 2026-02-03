@@ -1,5 +1,5 @@
 {
-  "extends": "@libs/utils/configs/backend-lib/tsconfig.base.json",
+  "extends": "@libs/repo-utils/configs/backend-lib/tsconfig.base.json",
   "include": ["src", "tests"],
   "compilerOptions": {
     "paths": {

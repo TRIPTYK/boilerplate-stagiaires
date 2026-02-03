@@ -1,9 +1,9 @@
-import type { FastifyInstanceTypeForModule, Route } from "@lib/init.js";
+import type { FastifyInstanceTypeForModule, Route } from "#src/init.js";
 import { object } from "zod";
 import {
   jsonApiSerializeSingleUserDocument,
   SerializedUserSchema,
-} from "@lib/serializers/user.serializer.js";
+} from "#src/serializers/user.serializer.js";
 
 export class ProfileRoute implements Route {
   public constructor() {}

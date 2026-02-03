@@ -1,6 +1,6 @@
 import type { EntityManager } from "@mikro-orm/core";
-import { verifyAccessToken } from "@lib/utils/jwt.utils.js";
-import { UserEntity } from "@lib/entities/user.entity.js";
+import { verifyAccessToken } from "#src/utils/jwt.utils.js";
+import { UserEntity } from "#src/entities/user.entity.js";
 import type { FastifyReply, FastifyRequest } from "fastify";
 
 /**

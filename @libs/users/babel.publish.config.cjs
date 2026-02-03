@@ -1,1 +1,1 @@
-module.exports = require('@libs/utils/configs/addon/publish.config.cjs');
+module.exports = require('@libs/repo-utils/configs/addon/publish.config.cjs');

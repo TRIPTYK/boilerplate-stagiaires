@@ -1,0 +1,29 @@
+{
+  "name": "@libs/backend-shared",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.mjs",
+  "types": "dist/index.d.mts",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "build": "tsdown"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "volta": {
+    "extends": "../../package.json"
+  },
+  "dependencies": {
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@libs/repo-utils": "workspace:^",
+    "@typescript/native-preview": "catalog:",
+    "tsdown": "^0.20.1",
+    "vite": "^7.3.1",
+    "vitest": "^4.0.18"
+  }
+}

@@ -1,12 +1,12 @@
-import type { FastifyInstanceTypeForModule, Route } from "@lib/init.js";
-import { type UserEntityType } from "@lib/entities/user.entity.js";
+import type { FastifyInstanceTypeForModule, Route } from "#src/init.js";
+import { type UserEntityType } from "#src/entities/user.entity.js";
 import type { EntityRepository } from "@mikro-orm/core";
 import { randomUUID } from "crypto";
 import {
   jsonApiSerializeSingleUserDocument,
   makeSingleJsonApiTopDocument,
   SerializedUserSchema,
-} from "@lib/serializers/user.serializer.js";
+} from "#src/serializers/user.serializer.js";
 import { hash } from "argon2";
 import { email, object, string } from "zod";
 
@@ -18,15 +18,17 @@ export class CreateRoute implements Route {
       "/",
       {
         schema: {
-          body: makeSingleJsonApiTopDocument(object({
-            id: string().optional(),
-            attributes: object({
-              email: email(),
-              firstName: string(),
-              lastName: string(),
-              password: string(),
-            })
-          })),
+          body: makeSingleJsonApiTopDocument(
+            object({
+              id: string().optional(),
+              attributes: object({
+                email: email(),
+                firstName: string(),
+                lastName: string(),
+                password: string(),
+              }),
+            }),
+          ),
           response: {
             200: makeSingleJsonApiTopDocument(SerializedUserSchema),
           },

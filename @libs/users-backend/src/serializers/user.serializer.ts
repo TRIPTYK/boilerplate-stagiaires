@@ -1,13 +1,7 @@
-import type { UserEntityType } from "@lib/entities/user.entity.js";
-import { email, literal, object, string, ZodObject } from "zod";
+import type { UserEntityType } from "#src/entities/user.entity.js";
+import { email, object, string } from "zod";
 import { z } from "zod";
-
-export const makeJsonApiDocumentSchema = <T extends ZodObject>(type: string, attributesSchema: T) =>
-  object({
-    id: string(),
-    type: literal(type),
-    attributes: attributesSchema,
-  });
+import { makeJsonApiDocumentSchema } from "@libs/backend-shared";
 
 export const SerializedUserSchema = makeJsonApiDocumentSchema(
   "users",
@@ -17,12 +11,6 @@ export const SerializedUserSchema = makeJsonApiDocumentSchema(
     lastName: string(),
   }),
 );
-
-export const makeSingleJsonApiTopDocument = <T extends ZodObject>(dataSchema: T) =>
-  object({
-    data: dataSchema,
-    meta: z.optional(z.record(z.string(), z.unknown())),
-  });
 
 export function jsonApiSerializeUser(user: UserEntityType): z.infer<typeof SerializedUserSchema> {
   return {

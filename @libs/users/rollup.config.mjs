@@ -3,7 +3,7 @@ import { Addon } from '@embroider/addon-dev/rollup';
 import { fileURLToPath } from 'node:url';
 import { resolve, dirname } from 'node:path';
 import alias from '@rollup/plugin-alias';
-import { moveRouteTemplatesPlugin, fileNameMapper } from '@libs/utils/configs/addon/mapper-plugin.mjs';
+import { moveRouteTemplatesPlugin, fileNameMapper } from '@libs/repo-utils/configs/addon/mapper-plugin.mjs';
 
 const addon = new Addon({
   srcDir: 'src',

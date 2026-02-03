@@ -7,15 +7,14 @@ import type {
 } from "fastify";
 import type { LibraryContext } from "./context.js";
 import type { ZodTypeProvider } from "fastify-type-provider-zod";
-import { createJwtAuthMiddleware } from "@lib/middlewares/jwt-auth.middleware.js";
-import { LoginRoute } from "@lib/routes/login.route.js";
-import { CreateRoute } from "@lib/routes/create.route.js";
-import { ProfileRoute } from "@lib/routes/profile.route.js";
-import { ListRoute } from "@lib/routes/list.route.js";
-import { GetRoute } from "@lib/routes/get.route.js";
-import { UpdateRoute } from "@lib/routes/update.route.js";
-import { DeleteRoute } from "@lib/routes/delete.route.js";
-import "@lib/types.js";
+import { createJwtAuthMiddleware } from "#src/middlewares/jwt-auth.middleware.js";
+import { LoginRoute } from "#src/routes/login.route.js";
+import { CreateRoute } from "#src/routes/create.route.js";
+import { ProfileRoute } from "#src/routes/profile.route.js";
+import { ListRoute } from "#src/routes/list.route.js";
+import { GetRoute } from "#src/routes/get.route.js";
+import { UpdateRoute } from "#src/routes/update.route.js";
+import { DeleteRoute } from "#src/routes/delete.route.js";
 import { UserEntity } from "./entities/user.entity.js";
 
 export type FastifyInstanceTypeForModule = FastifyInstance<
@@ -37,11 +36,11 @@ export interface ModuleInterface {
 export class Module implements ModuleInterface {
   private constructor(private context: LibraryContext) {}
 
-  public static init(context: LibraryContext) {
+  public static init(context: LibraryContext): Module {
     return new Module(context);
   }
 
-  public async setupRoutes(fastify: FastifyInstanceTypeForModule) {
+  public async setupRoutes(fastify: FastifyInstanceTypeForModule): Promise<void> {
     const repository = this.context.em.getRepository(UserEntity);
 
     const authRoutes: Route[] = [

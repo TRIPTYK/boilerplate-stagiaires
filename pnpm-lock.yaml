@@ -166,7 +166,7 @@ catalogs:
       specifier: ^4.0.9
       version: 4.0.9
     '@typescript/native-preview':
-      specifier: ~7.0.0-dev.20260202.1
+      specifier: 7.0.0-dev.20260202.1
       version: 7.0.0-dev.20260202.1
     '@vitest/browser-playwright':
       specifier: ^4.0.18
@@ -498,9 +498,9 @@ importers:
       '@fastify/static':
         specifier: 'catalog:'
         version: 9.0.0
-      '@libs/utils':
+      '@libs/repo-utils':
         specifier: workspace:*
-        version: link:../../@libs/utils
+        version: link:../../@libs/repo-utils
       '@mikro-orm/cli':
         specifier: 'catalog:'
         version: 6.6.6(sqlite3@5.1.7)
@@ -868,6 +868,30 @@ importers:
         specifier: ^4.0.0
         version: 4.3.6
 
+  '@libs/backend-shared':
+    dependencies:
+      zod:
+        specifier: ^4.0.0
+        version: 4.3.6
+    devDependencies:
+      '@libs/repo-utils':
+        specifier: workspace:^
+        version: link:../repo-utils
+      '@typescript/native-preview':
+        specifier: 'catalog:'
+        version: 7.0.0-dev.20260202.1
+      tsdown:
+        specifier: ^0.20.1
+        version: 0.20.1(@typescript/native-preview@7.0.0-dev.20260202.1)(typescript@5.9.3)
+      vite:
+        specifier: ^7.3.1
+        version: 7.3.1(@types/node@25.2.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(yaml@2.8.2)
+      vitest:
+        specifier: ^4.0.18
+        version: 4.0.18(@types/node@25.2.0)(@vitest/browser-playwright@4.0.18)(@vitest/ui@4.0.18)(jiti@2.6.1)(jsdom@26.1.0)(lightningcss@1.31.1)(msw@2.12.7(@types/node@25.2.0)(typescript@5.9.3))(terser@5.46.0)(yaml@2.8.2)
+
+  '@libs/repo-utils': {}
+
   '@libs/users':
     dependencies:
       '@embroider/addon-shim':
@@ -994,9 +1018,9 @@ importers:
       '@glint/tsserver-plugin':
         specifier: 'catalog:'
         version: 2.1.0
-      '@libs/utils':
+      '@libs/repo-utils':
         specifier: workspace:^
-        version: link:../utils
+        version: link:../repo-utils
       '@rollup/plugin-alias':
         specifier: 'catalog:'
         version: 6.0.0(rollup@4.57.1)
@@ -1199,9 +1223,12 @@ importers:
       '@fastify/static':
         specifier: 'catalog:'
         version: 9.0.0
-      '@libs/utils':
+      '@libs/backend-shared':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../backend-shared
+      '@libs/repo-utils':
+        specifier: workspace:*
+        version: link:../repo-utils
       '@mikro-orm/cli':
         specifier: 'catalog:'
         version: 6.6.6(sqlite3@5.1.7)
@@ -1301,8 +1328,6 @@ importers:
       vite-tsconfig-paths:
         specifier: 'catalog:'
         version: 6.0.5(typescript@5.9.3)(vite@8.0.0-beta.11(@types/node@25.2.0)(esbuild@0.27.2)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.2))
-
-  '@libs/utils': {}
 
 packages:
 

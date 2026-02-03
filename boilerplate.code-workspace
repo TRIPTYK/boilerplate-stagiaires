@@ -12,7 +12,11 @@
             "path": "@apps/backend"
         },
         {
-            "name": "@libs/users",
+            "name": "@libs/backend-shared",
+            "path": "@libs/backend-shared"
+        },
+        {
+            "name": "@libs/users-front",
             "path": "@libs/users"
         },
         {
@@ -20,8 +24,8 @@
             "path": "@libs/users-backend"
         },
         {
-            "name": "@libs/utils",
-            "path": "@libs/utils"
+            "name": "@libs/repo-utils",
+            "path": "@libs/repo-utils"
         },
         {
             "name": "ROOT",
