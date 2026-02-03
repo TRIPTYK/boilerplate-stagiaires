@@ -5,23 +5,23 @@
     "folders": [
         {
             "name": "@app/front",
-            "path": "front-app"
+            "path": "@app/front"
         },
         {
             "name": "@app/backend",
-            "path": "backend-app"
+            "path": "@app/backend"
         },
         {
             "name": "@libs/users",
-            "path": "libs/users"
+            "path": "@libs/users"
         },
         {
             "name": "@libs/users-backend",
-            "path": "libs/users-backend"
+            "path": "@libs/users-backend"
         },
         {
             "name": "@libs/utils",
-            "path": "libs/utils"
+            "path": "@libs/utils"
         },
         {
             "name": "ROOT",

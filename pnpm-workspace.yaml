@@ -1,7 +1,6 @@
 packages:
-  - front-app
-  - libs/*
-  - backend-app
+  - '@app/*'
+  - '@libs/*'
 autoInstallPeers: false
 onlyBuiltDependencies:
   - core-js
@@ -12,6 +11,9 @@ onlyBuiltDependencies:
 patchedDependencies:
   "@embroider/vite": patches/@embroider__vite.patch
 catalog:
+  "@triptyk/ember-input": "git+https://github.com/TRIPTYK/ember-common-ui/tree/upgrade-ember-ember-input-dist"
+  "@triptyk/ember-input-validation": "git+https://github.com/TRIPTYK/ember-common-ui/tree/upgrade-ember-ember-input-validation-dist"
+  "@triptyk/ember-ui": "git+https://github.com/TRIPTYK/ember-common-ui/tree/upgrade-ember-ember-ui-dist"
   "@babel/core": ~7.28.6
   "@babel/plugin-transform-runtime": ~7.28.5
   "@ember-data/debug": 5.8.1

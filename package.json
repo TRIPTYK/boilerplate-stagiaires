@@ -16,20 +16,22 @@
       "ember-basic-dropdown": "git+https://github.com/cibernox/ember-basic-dropdown/tree/dist"
     },
     "patchedDependencies": {
-      "@embroider/vite": "patches/@embroider__vite.patch",
-      "ember-power-select-with-create": "patches/ember-power-select-with-create.patch"
+      "@embroider/vite": "patches/@embroider__vite.patch"
     },
     "onlyBuiltDependencies": [
+      "@swc/core",
+      "argon2",
       "core-js",
       "core-js-pure",
+      "cpu-features",
       "edgedriver",
       "esbuild",
       "geckodriver",
-      "msw"
+      "protobufjs",
+      "ssh2"
     ]
   },
   "devDependencies": {
-    "backend-app": "workspace:^",
     "turbo": "catalog:"
   },
   "volta": {
