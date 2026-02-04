@@ -16,5 +16,7 @@ export * from "#src/serializers/user.serializer.js";
 export * from "#src/utils/token.utils.js";
 export * from "#src/utils/token-cleanup.utils.js";
 export * from "#src/init.js";
+export * from "#src/utils/jwt.utils.js";
+export * from "#src/utils/auth.utils.js";
 
 export const entities = [UserEntity, RefreshTokenEntity];

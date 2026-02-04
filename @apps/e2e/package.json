@@ -9,7 +9,7 @@
     "test:ui": "pnpm run setup && playwright test --ui",
     "test:headed": "pnpm run setup && playwright test --headed",
     "test:debug": "pnpm run setup && playwright test --debug",
-    "setup": "node scripts/setup.ts",
+    "setup": "node scripts/setup.ts && pnpm run setup:db",
     "setup:db": "node scripts/setup-db.ts"
   },
   "devDependencies": {

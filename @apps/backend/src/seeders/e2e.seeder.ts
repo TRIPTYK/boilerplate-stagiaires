@@ -1,7 +1,6 @@
+import { hashPassword, UserEntity } from "@libs/users-backend";
 import type { EntityManager } from "@mikro-orm/core";
 import { Seeder } from "@mikro-orm/seeder";
-import { hashPassword } from "@libs/users-backend/utils/auth.utils";
-import { UserEntity } from "@libs/users-backend/entities/user.entity";
 
 /**
  * E2E test seeder - creates users needed for Playwright e2e tests

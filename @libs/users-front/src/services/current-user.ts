@@ -36,6 +36,9 @@ export default class CurrentUserService extends Service {
       ),
     );
 
+    console.log("user", response.content.data, "loaded");
+
+
     this.user = response.content.data;
   }
 }

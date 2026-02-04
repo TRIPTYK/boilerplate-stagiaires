@@ -20,7 +20,7 @@ test.describe('Users Dashboard', () => {
   test('displays users list', async ({ page }) => {
     // Verify page title
     await expect(
-      page.getByRole('heading', { name: 'List des utilisateurs' })
+      page.getByRole('heading', { name: 'Liste des utilisateurs' })
     ).toBeVisible();
 
     // Verify table headers
@@ -180,7 +180,7 @@ test.describe('Users Dashboard', () => {
 
     // Verify page is still functional
     await expect(
-      page.getByRole('heading', { name: 'List des utilisateurs' })
+      page.getByRole('heading', { name: 'Liste des utilisateurs' })
     ).toBeVisible();
   });
 });

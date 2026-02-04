@@ -22,6 +22,17 @@ module.exports = function (environment) {
 
   if (environment === 'development') {
     ENV['ember-simple-auth-token'] = {
+      refreshAccessTokens: true,
+      tokenExpirationInvalidateSession: true,
+      serverTokenEndpoint: 'api/v1/auth/login',
+      tokenPropertyName: 'data.accessToken',
+      refreshTokenPropertyName: 'data.refreshToken',
+      headers: {},
+    };
+  }
+
+  if (environment === 'e2e') {
+    ENV['ember-simple-auth-token'] = {
       serverTokenEndpoint: 'api/v1/auth/login',
       tokenPropertyName: 'data.accessToken',
       refreshTokenPropertyName: 'data.refreshToken',
@@ -42,7 +53,12 @@ module.exports = function (environment) {
   }
 
   if (environment === 'production') {
-    // here you can enable a production-specific feature
+    ENV['ember-simple-auth-token'] = {
+      serverTokenEndpoint: 'api/v1/auth/login',
+      tokenPropertyName: 'data.accessToken',
+      refreshTokenPropertyName: 'data.refreshToken',
+      headers: {},
+    };
   }
 
   return ENV;

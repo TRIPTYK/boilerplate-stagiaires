@@ -8,6 +8,7 @@ import TpkLoginForm from '@triptyk/ember-ui/components/prefabs/tpk-login';
 import type CurrentUserService from '#src/services/current-user.ts';
 import { t } from 'ember-intl';
 import type { IntlService } from 'ember-intl';
+import { hash } from '@ember/helper';
 
 export default class LoginForm extends Component {
   @service declare session: SessionService;
@@ -29,6 +30,10 @@ export default class LoginForm extends Component {
       <h2>{{t "users.forms.login.title"}}</h2>
       <TpkLoginForm
         @onSubmit={{this.onSubmit}}
+        @initialValues={{hash
+          email="deflorenne.amaury@triptyk.eu"
+          password="123456789"
+        }}
         @loginSchema={{this.loginValidationSchema}}
       />
     </div>
