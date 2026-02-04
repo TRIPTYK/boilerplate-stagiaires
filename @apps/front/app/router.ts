@@ -8,7 +8,7 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
-  this.route('dashboard', function () {
+  this.route('dashboard', { path: '/' }, function () {
     userLibRouter.call(this);
   });
   authRoutes.call(this);

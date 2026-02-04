@@ -8,7 +8,8 @@ import TpkLoginForm from '@triptyk/ember-ui/components/prefabs/tpk-login';
 import type CurrentUserService from '#src/services/current-user.ts';
 import { t } from 'ember-intl';
 import type { IntlService } from 'ember-intl';
-import { hash } from '@ember/helper';
+import AuthLayout from '../auth-layout.gts';
+import { LinkTo } from '@ember/routing';
 
 export default class LoginForm extends Component {
   @service declare session: SessionService;
@@ -26,8 +27,8 @@ export default class LoginForm extends Component {
   };
 
   <template>
-    <div class="login-form-container" data-test-login-form>
-      <h2>{{t "users.forms.login.title"}}</h2>
+    <AuthLayout data-test-login-form>
+      <h1>{{t "users.forms.login.title"}}</h1>
       <TpkLoginForm
         @onSubmit={{this.onSubmit}}
         @initialValues={{hash
@@ -35,8 +36,12 @@ export default class LoginForm extends Component {
           password="123456789"
         }}
         @loginSchema={{this.loginValidationSchema}}
+        class="tpk-login-form"
       />
-    </div>
+      <LinkTo @route="forgot-password" class="forgot-password-link">
+        Forgot password?
+      </LinkTo>
+    </AuthLayout>
   </template>
 }
 

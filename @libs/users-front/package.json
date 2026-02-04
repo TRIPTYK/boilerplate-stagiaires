@@ -146,6 +146,7 @@
       "./routes/dashboard/users/create.js": "./dist/_app_/routes/dashboard/users/create.js",
       "./routes/dashboard/users/edit.js": "./dist/_app_/routes/dashboard/users/edit.js",
       "./routes/dashboard/users/index.js": "./dist/_app_/routes/dashboard/users/index.js",
+      "./routes/forgot-password.js": "./dist/_app_/routes/forgot-password.js",
       "./routes/login.js": "./dist/_app_/routes/login.js",
       "./routes/logout.js": "./dist/_app_/routes/logout.js",
       "./schemas/users.js": "./dist/_app_/schemas/users.js",
@@ -154,6 +155,7 @@
       "./templates/dashboard/users/create.js": "./dist/_app_/templates/dashboard/users/create.js",
       "./templates/dashboard/users/edit.js": "./dist/_app_/templates/dashboard/users/edit.js",
       "./templates/dashboard/users/index.js": "./dist/_app_/templates/dashboard/users/index.js",
+      "./templates/forgot-password.js": "./dist/_app_/templates/forgot-password.js",
       "./templates/login.js": "./dist/_app_/templates/login.js"
     }
   }

@@ -2,18 +2,34 @@ import type { TOC } from '@ember/component/template-only';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import type CurrentUserService from '@libs/users-front/services/current-user';
-import TpkDashBoard from '@triptyk/ember-ui/components/prefabs/tpk-dashboard';
+import TpkDashBoard, {
+  type SidebarItem,
+  type Language,
+} from '@triptyk/ember-ui/components/prefabs/tpk-dashboard';
 import type SessionService from 'ember-simple-auth/services/session';
+import type { IntlService } from 'ember-intl';
+import { action } from '@ember/object';
 
 export default class DashboardTemplate extends Component {
   @service declare currentUser: CurrentUserService;
   @service declare session: SessionService;
+  @service declare intl: IntlService;
 
-  menuItems = [
+  languages: Language[] = [
+    { code: 'fr-fr', label: 'Français' },
+    { code: 'en-us', label: 'Anglais' },
+  ];
+
+  @action
+  handleLocaleChange(locale: string) {
+    this.intl.setLocale([locale]);
+  }
+
+  menuItems: SidebarItem[] = [
     {
+      type: 'link',
       label: 'Dashboard',
       route: 'dashboard',
-      tooltip: 'Dashboard',
       icon: <template>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -31,6 +47,7 @@ export default class DashboardTemplate extends Component {
       </template> as TOC<{ Element: SVGSVGElement }>,
     },
     {
+      type: 'link',
       label: 'Users',
       route: 'dashboard.users',
       tooltip: 'Users',
@@ -70,8 +87,12 @@ export default class DashboardTemplate extends Component {
       @currentUser={{this.userForNav}}
       @onLogout={{this.logout}}
       @sidebarItems={{this.menuItems}}
+      @languages={{this.languages}}
+      @onLocaleChange={{this.handleLocaleChange}}
     >
-      {{outlet}}
+      <:content>
+        {{outlet}}
+      </:content>
     </TpkDashBoard>
   </template>
 }

@@ -57,5 +57,7 @@ export function forRouter(this: DSL) {
 
 export function authRoutes(this: DSL) {
   this.route('login');
+  this.route('forgot-password');
+  this.route('reset-password');
   this.route('logout');
 }
