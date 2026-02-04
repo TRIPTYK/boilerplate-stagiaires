@@ -6,7 +6,12 @@ import {
   SerializedUserSchema,
 } from "#src/serializers/user.serializer.js";
 import type { UserEntityType } from "#src/entities/user.entity.js";
-import { jsonApiErrorDocumentSchema, makeJsonApiError, makeSingleJsonApiTopDocument, type Route } from "@libs/backend-shared";
+import {
+  jsonApiErrorDocumentSchema,
+  makeJsonApiError,
+  makeSingleJsonApiTopDocument,
+  type Route,
+} from "@libs/backend-shared";
 
 export class UpdateRoute implements Route {
   public constructor(private userRepository: EntityRepository<UserEntityType>) {}

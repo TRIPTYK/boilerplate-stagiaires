@@ -17,7 +17,4 @@ export * from "#src/utils/token.utils.js";
 export * from "#src/utils/token-cleanup.utils.js";
 export * from "#src/init.js";
 
-export const entities = [
-    UserEntity,
-    RefreshTokenEntity,
-];
+export const entities = [UserEntity, RefreshTokenEntity];

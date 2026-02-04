@@ -6,7 +6,10 @@ import type {
   RawServerDefault,
 } from "fastify";
 import type { LibraryContext } from "./context.js";
-import { hasZodFastifySchemaValidationErrors, type ZodTypeProvider } from "fastify-type-provider-zod";
+import {
+  hasZodFastifySchemaValidationErrors,
+  type ZodTypeProvider,
+} from "fastify-type-provider-zod";
 import { createJwtAuthMiddleware } from "#src/middlewares/jwt-auth.middleware.js";
 import { LoginRoute } from "#src/routes/login.route.js";
 import { RefreshRoute } from "#src/routes/refresh.route.js";

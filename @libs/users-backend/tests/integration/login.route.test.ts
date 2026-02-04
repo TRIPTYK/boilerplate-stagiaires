@@ -7,88 +7,88 @@ const expect = hardExpect.soft;
 let module: TestModule;
 
 beforeAll(async () => {
-    module = await TestModule.init();
+  module = await TestModule.init();
 });
 
 afterAll(async () => {
-    await module.close();
+  await module.close();
 });
 
 aroundEach(async (runTest) => {
-    await module.em.begin();
-    await runTest();
-    await module.em.rollback();
+  await module.em.begin();
+  await runTest();
+  await module.em.rollback();
 });
 
 test("LoginRoute returns tokens on valid credentials", async () => {
-    const response = await module.fastifyInstance.inject({
-        method: "POST",
-        url: "/auth/login",
-        payload: {
-            email: "a@test.com",
-            password: "testpassword",
-        },
-    });
+  const response = await module.fastifyInstance.inject({
+    method: "POST",
+    url: "/auth/login",
+    payload: {
+      email: "a@test.com",
+      password: "testpassword",
+    },
+  });
 
-    expect(response.statusCode).toBe(200);
-    const body = response.json();
-    expect(body).toHaveProperty("data");
-    expect(body.data).toHaveProperty("accessToken");
-    expect(body.data).toHaveProperty("refreshToken");
-    expect(typeof body.data.accessToken).toBe("string");
-    expect(typeof body.data.refreshToken).toBe("string");
+  expect(response.statusCode).toBe(200);
+  const body = response.json();
+  expect(body).toHaveProperty("data");
+  expect(body.data).toHaveProperty("accessToken");
+  expect(body.data).toHaveProperty("refreshToken");
+  expect(typeof body.data.accessToken).toBe("string");
+  expect(typeof body.data.refreshToken).toBe("string");
 });
 
 test("LoginRoute returns JSON:API error on invalid email", async () => {
-    const response = await module.fastifyInstance.inject({
-        method: "POST",
-        url: "/auth/login",
-        payload: {
-            email: "nonexistent@test.com",
-            password: "testpassword",
-        },
-    });
+  const response = await module.fastifyInstance.inject({
+    method: "POST",
+    url: "/auth/login",
+    payload: {
+      email: "nonexistent@test.com",
+      password: "testpassword",
+    },
+  });
 
-    expect(response.statusCode).toBe(401);
-    const body = response.json();
-    expect(body).toHaveProperty("errors");
-    expect(Array.isArray(body.errors)).toBe(true);
-    expect(body.errors[0]).toMatchObject({
-        status: "401",
-        title: "Invalid Credentials",
-        code: "INVALID_CREDENTIALS",
-        detail: "Invalid email or password",
-    });
+  expect(response.statusCode).toBe(401);
+  const body = response.json();
+  expect(body).toHaveProperty("errors");
+  expect(Array.isArray(body.errors)).toBe(true);
+  expect(body.errors[0]).toMatchObject({
+    status: "401",
+    title: "Invalid Credentials",
+    code: "INVALID_CREDENTIALS",
+    detail: "Invalid email or password",
+  });
 });
 
 test("LoginRoute returns JSON:API error on invalid password", async () => {
-    const response = await module.fastifyInstance.inject({
-        method: "POST",
-        url: "/auth/login",
-        payload: {
-            email: "a@test.com",
-            password: "wrongpassword",
-        },
-    });
+  const response = await module.fastifyInstance.inject({
+    method: "POST",
+    url: "/auth/login",
+    payload: {
+      email: "a@test.com",
+      password: "wrongpassword",
+    },
+  });
 
-    expect(response.statusCode).toBe(401);
-    const body = response.json();
-    expect(body).toHaveProperty("errors");
-    expect(Array.isArray(body.errors)).toBe(true);
-    expect(body.errors[0]).toMatchObject({
-        status: "401",
-        title: "Invalid Credentials",
-        code: "INVALID_CREDENTIALS",
-        detail: "Invalid email or password",
-    });
+  expect(response.statusCode).toBe(401);
+  const body = response.json();
+  expect(body).toHaveProperty("errors");
+  expect(Array.isArray(body.errors)).toBe(true);
+  expect(body.errors[0]).toMatchObject({
+    status: "401",
+    title: "Invalid Credentials",
+    code: "INVALID_CREDENTIALS",
+    detail: "Invalid email or password",
+  });
 });
 
 test("LoginRoute returns validation error on missing fields", async () => {
-    const response = await module.fastifyInstance.inject({
-        method: "POST",
-        url: "/auth/login",
-        payload: {},
-    });
+  const response = await module.fastifyInstance.inject({
+    method: "POST",
+    url: "/auth/login",
+    payload: {},
+  });
 
-    expect(response.statusCode).toBe(400);
+  expect(response.statusCode).toBe(400);
 });

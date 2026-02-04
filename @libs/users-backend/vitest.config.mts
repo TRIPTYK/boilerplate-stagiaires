@@ -4,6 +4,8 @@ import path from "vite-tsconfig-paths";
 export default defineConfig({
   plugins: [path()],
   test: {
+    globalSetup: "./tests/global-setup.ts",
+    maxWorkers: 1,
     include: ["tests/**/*.test.ts", "src/**/*.test.ts"],
     environment: "node",
     pool: "forks",
