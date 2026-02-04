@@ -1,4 +1,4 @@
-import { defineConfig, MikroORM } from "@mikro-orm/sqlite";
+import { defineConfig, MikroORM } from "@mikro-orm/postgresql";
 import type { AppConfiguration } from "../configuration.js";
 import { RefreshTokenEntity, UserEntity } from "@libs/users-backend";
 

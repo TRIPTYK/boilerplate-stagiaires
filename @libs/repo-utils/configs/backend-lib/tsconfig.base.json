@@ -25,7 +25,8 @@
     "sourceMap": true,
     "inlineSources": true,
     "types": [
-      "vitest/importMeta"
+      "vitest/importMeta",
+      "vite/client"
     ],
     "sourceRoot": "/"
   }

@@ -16,11 +16,16 @@ export default class ApplicationRoute extends Route {
   async beforeModel() {
     this.intl.setLocale('en-us');
     this.intl.addTranslations('en-us', translationsForEnUs);
-    const worker = setupWorker(...allHandlers);
-    this.worker = worker;
-    await worker.start({
-      onUnhandledRequest: 'bypass',
-    });
+
+    // Skip MSW when running against real backend (e2e tests)
+    if (import.meta.env.VITE_MOCK_API !== 'false') {
+      const worker = setupWorker(...allHandlers);
+      this.worker = worker;
+      await worker.start({
+        onUnhandledRequest: 'bypass',
+      });
+    }
+
     await initializeUserLib(getOwner(this)!);
   }
 

@@ -1,4 +1,4 @@
-import { defineConfig } from "@mikro-orm/sqlite";
+import { defineConfig } from "@mikro-orm/postgresql";
 import { loadConfiguration } from "./configuration.js";
 import { databaseConfig } from "./app/database.connection.js";
 import { seed } from "@ngneat/falso";

@@ -6,6 +6,17 @@ import { classicEmberSupport, ember, extensions } from '@embroider/vite';
 import { babel } from '@rollup/plugin-babel';
 import { loadTranslations } from '@ember-intl/vite';
 
+// Proxy configuration for e2e tests (when VITE_MOCK_API=false)
+const apiProxy =
+  process.env.VITE_MOCK_API === 'false'
+    ? {
+        '/api': {
+          target: process.env.VITE_API_URL || 'http://localhost:8000',
+          changeOrigin: true,
+        },
+      }
+    : undefined;
+
 export default defineConfig({
   test: {
     include: ['tests/**/*-test.{gjs,gts}'],
@@ -17,7 +28,12 @@ export default defineConfig({
       instances: [{ browser: 'chromium' }],
     },
   },
-  // Existing config:
+  server: {
+    proxy: apiProxy,
+  },
+  preview: {
+    proxy: apiProxy,
+  },
   plugins: [
     tailwindcss(),
     classicEmberSupport(),

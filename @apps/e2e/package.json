@@ -1,0 +1,19 @@
+{
+  "name": "@apps/e2e",
+  "version": "1.0.0",
+  "private": true,
+  "description": "End-to-end tests for the application",
+  "type": "module",
+  "scripts": {
+    "test": "pnpm run setup && playwright test",
+    "test:ui": "pnpm run setup && playwright test --ui",
+    "test:headed": "pnpm run setup && playwright test --headed",
+    "test:debug": "pnpm run setup && playwright test --debug",
+    "setup": "node scripts/setup.ts",
+    "setup:db": "node scripts/setup-db.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "catalog:",
+    "@types/node": "^25.2.0"
+  }
+}

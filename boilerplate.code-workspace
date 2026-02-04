@@ -12,6 +12,10 @@
             "path": "@apps/backend"
         },
         {
+            "name": "@apps/e2e",
+            "path": "@apps/e2e"
+        },
+        {
             "name": "@libs/backend-shared",
             "path": "@libs/backend-shared"
         },
