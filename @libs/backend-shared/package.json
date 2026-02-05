@@ -8,6 +8,7 @@
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest watch",
     "build": "tsdown",
+    "build:watch": "tsdown --watch",
     "lint": "oxlint src",
     "lint:fix": "oxlint src --fix",
     "lint:format": "oxfmt check src",

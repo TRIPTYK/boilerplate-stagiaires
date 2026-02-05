@@ -56,6 +56,11 @@ export default class UsersForm extends Component<UsersFormArgs> {
           @validationField="lastName"
           class="col-span-12 md:col-span-4"
         />
+        <F.TpkPasswordPrefab
+          @label={{t "users.forms.user.labels.password"}}
+          @validationField="password"
+          class="col-span-12 md:col-span-4"
+        />
         <F.TpkEmailPrefab
           @label={{t "users.forms.user.labels.email"}}
           @validationField="email"

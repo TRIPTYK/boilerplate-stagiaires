@@ -9,6 +9,8 @@ export default class AuthHandler {
   request<T>(context: RequestContext, next: NextFn<T>) {
     const headers = new Headers(context.request.headers);
 
+    headers.append('Content-Type', 'application/json');
+
     const authData = this.session.data.authenticated as Record<string, unknown>;
     const accessToken = (authData?.['data'] as Record<string, unknown>)?.[
       'accessToken'

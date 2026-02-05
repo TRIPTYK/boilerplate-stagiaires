@@ -20,7 +20,7 @@ export class CreateRoute implements Route {
         schema: {
           body: makeSingleJsonApiTopDocument(
             object({
-              id: string().optional(),
+              id: string().optional().nullable(),
               attributes: object({
                 email: email(),
                 firstName: string(),

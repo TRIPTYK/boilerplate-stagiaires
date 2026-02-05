@@ -42,6 +42,14 @@ export class App {
       loggerInstance,
     });
 
+
+    fastifyInstance.addContentTypeParser(
+      "application/vnd.api+json",
+      // @ts-expect-error
+      fastifyInstance.getDefaultJsonParser('ignore', 'ignore')
+    )
+
+
     fastifyInstance.register(fastifySecureSession, {
       key: Buffer.from(context.configuration.SESSION_KEY, "hex"),
     });

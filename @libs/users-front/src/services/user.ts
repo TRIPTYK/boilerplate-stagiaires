@@ -20,7 +20,7 @@ export default class UserService extends Service {
     }
   }
 
-  private create(data: CreateUserData) {
+  private async create(data: CreateUserData) {
     const user = this.store.createRecord<User>('users', data);
     const request = createRecord(user);
 
@@ -28,7 +28,12 @@ export default class UserService extends Service {
       data: this.store.cache.peek(cacheKeyFor(user)),
     });
 
-    return this.store.request(request);
+    try {
+      const create = await this.store.request(request);
+      return create;
+    } catch (error) {
+      console.error('Error creating user:', error);
+    }
   }
 
   private update(data: UpdateUserData) {

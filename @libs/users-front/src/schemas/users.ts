@@ -10,6 +10,7 @@ const UserSchema = withDefaults({
     { name: 'firstName', kind: 'attribute' },
     { name: 'lastName', kind: 'attribute' },
     { name: 'email', kind: 'attribute' },
+    { name: 'password', kind: 'attribute' },
   ],
 });
 
@@ -19,5 +20,6 @@ export type User = WithLegacy<{
   firstName: string;
   lastName: string;
   email: string;
+  password: string;
   [Type]: 'users';
 }>;

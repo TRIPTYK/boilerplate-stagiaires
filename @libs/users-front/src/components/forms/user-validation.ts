@@ -13,6 +13,7 @@ export const createUserValidationSchema = (intl: IntlService) =>
       intl.t('users.forms.user.validation.lastNameRequired')
     ),
     email: email(intl.t('users.forms.user.validation.invalidEmail')),
+    password: string(),
     id: string().optional().nullable(),
   });
 

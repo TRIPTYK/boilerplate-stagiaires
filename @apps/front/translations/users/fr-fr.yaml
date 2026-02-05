@@ -20,6 +20,7 @@ forms:
     labels:
       firstName: 'Prénom'
       lastName: 'Nom'
+      password: 'Mot de passe'
       email: 'Email'
     validation:
       firstNameRequired: 'Le prénom est requis'
