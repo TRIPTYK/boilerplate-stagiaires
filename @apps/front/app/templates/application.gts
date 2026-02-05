@@ -3,8 +3,6 @@ import FlashMessage from 'ember-cli-flash/components/flash-message';
 import Component from '@glimmer/component';
 import { service } from '@ember/service';
 import type FlashMessageService from 'ember-cli-flash/services/flash-messages';
-// eslint-disable-next-line
-import component from '@ember/component/template-only';
 
 interface ApplicationSignature {
   Args: {

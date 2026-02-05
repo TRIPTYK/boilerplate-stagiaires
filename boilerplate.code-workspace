@@ -1,7 +1,5 @@
 {
-    "settings": {
-        "typescript.experimental.useTsgo": true
-    },
+    "settings": {},
     "folders": [
         {
             "name": "@apps/front",

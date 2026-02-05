@@ -11,11 +11,13 @@ import type { IntlService } from 'ember-intl';
 import AuthLayout from '../auth-layout.gts';
 import { LinkTo } from '@ember/routing';
 import { hash } from '@ember/helper';
+import type RouterService from '@ember/routing/router-service';
 
 export default class LoginForm extends Component {
   @service declare session: SessionService;
   @service declare currentUser: CurrentUserService;
   @service declare intl: IntlService;
+  @service declare router: RouterService;
 
   get loginValidationSchema(): ReturnType<typeof createLoginValidationSchema> {
     return createLoginValidationSchema(this.intl);

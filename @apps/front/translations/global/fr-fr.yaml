@@ -1,9 +1,10 @@
-search: 'Rechercher'
-yes: 'Oui'
-no: 'Non'
-previous: 'Précédent'
-next: 'suivant'
-missing: 'Aucun résultat'
-on: 'sur'
-results: 'résultats'
-results_by_page: 'Résultats par page'
+search: "Rechercher"
+yes: "Oui"
+no: "Non"
+previous: "Précédent"
+next: "suivant"
+missing: "Aucun résultat"
+on: "sur"
+results: "résultats"
+results_by_page: "Résultats par page"
+theme: "Thème"

@@ -2,11 +2,13 @@ import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import type { IntlService } from 'ember-intl';
 import translationsForEnUs from 'virtual:ember-intl/translations/en-us';
+import translationsForFrFr from 'virtual:ember-intl/translations/fr-fr';
 import { setupWorker } from 'msw/browser';
 import { initialize as initializeUserLib } from '@libs/users-front';
 import { getOwner } from '@ember/-internals/owner';
 import type SessionService from '@apps/front/services/session';
 import allHandlers from '@libs/users-front/http-mocks/all';
+import setTheme from '../utils/set-theme';
 
 export default class ApplicationRoute extends Route {
   @service declare intl: IntlService;
@@ -14,8 +16,10 @@ export default class ApplicationRoute extends Route {
   worker?: ReturnType<typeof setupWorker>;
 
   async beforeModel() {
+    setTheme();
     this.intl.setLocale('en-us');
     this.intl.addTranslations('en-us', translationsForEnUs);
+    this.intl.addTranslations('fr-fr', translationsForFrFr);
 
     // Skip MSW when running against real backend (e2e tests)
     if (import.meta.env.VITE_MOCK_API !== 'false') {

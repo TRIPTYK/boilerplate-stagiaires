@@ -6,10 +6,10 @@ import TpkDashBoard, {
   type SidebarItem,
   type Language,
 } from '@triptyk/ember-ui/components/prefabs/tpk-dashboard';
+import TpkThemeSelector from '@triptyk/ember-ui/components/prefabs/tpk-theme-selector';
 import type SessionService from 'ember-simple-auth/services/session';
 import type { IntlService } from 'ember-intl';
 import { action } from '@ember/object';
-import ThemeSelector from '../components/theme-selector.gts';
 import { tracked } from '@glimmer/tracking';
 
 export default class DashboardTemplate extends Component {
@@ -127,7 +127,7 @@ export default class DashboardTemplate extends Component {
             {{if this.sidebarCollapsed 'flex-col'}}"
         >
           <FooterComponent @collapsed={{this.sidebarCollapsed}} />
-          <ThemeSelector @sidebarCollapsed={{this.sidebarCollapsed}} />
+          <TpkThemeSelector @sidebarCollapsed={{this.sidebarCollapsed}} />
         </div>
       </:footer>
     </TpkDashBoard>
